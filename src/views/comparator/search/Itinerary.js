@@ -1,7 +1,7 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from "react";
+import styled from "styled-components";
 
-import Address from './itinerary/Address'
+import Address from "./itinerary/Address";
 
 const Wrapper = styled.div`
   position: relative;
@@ -13,12 +13,12 @@ const Wrapper = styled.div`
   ${(props) => props.theme.mq.medium} {
     font-size: 1.5rem;
   }
-`
+`;
 const Start = styled.div`
   position: relative;
   display: flex;
   margin-bottom: 1.5rem;
-`
+`;
 const End = styled.div`
   margin-left: 15rem;
 
@@ -26,14 +26,14 @@ const End = styled.div`
     align-self: flex-end;
     margin: 0;
   }
-`
+`;
 export default function Itinerary() {
   return (
     <Wrapper>
-      <Start>Quand je vais</Start>
-      <Address type='from' />
-      <Address type='to' />
-      <End>j'émets</End>
+      <Start>Mon déplacement</Start>
+      <Address type="from" />
+      <Address type="to" />
+      <End>est-il faisable en train + vélo ?</End>
     </Wrapper>
-  )
+  );
 }

@@ -1,8 +1,6 @@
-# Mon convertisseur CO2
+# Train vélo, ou sansbagnole.fr
 
-Application web permettant de comparer la consommation en CO2e de différents modes de transport.
 
-https://monimpacttransport.fr/
 
 ## Développement
 

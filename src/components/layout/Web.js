@@ -60,7 +60,6 @@ export default function Web(props) {
         <Learning />
       </Content>
       <Embed />
-      <Configurator />
     </Wrapper>
   );
 }

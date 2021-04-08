@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react'
-import styled from 'styled-components'
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
 
 const Wrapper = styled.div`
   position: relative;
   z-index: 10;
-  display: ${(props) => (props.focus ? 'block' : 'none')};
-`
+  display: ${(props) => (props.focus ? "block" : "none")};
+`;
 const Suggestion = styled.button`
   display: block;
   width: 100%;
@@ -25,13 +25,13 @@ const Suggestion = styled.button`
   span {
     font-size: 1rem;
   }
-`
+`;
 export default function Suggestions(props) {
-  const [scrolled, setScrolled] = useState(false)
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    setScrolled(false)
-  }, [props.suggestions])
+    setScrolled(false);
+  }, [props.suggestions]);
 
   return (
     <Wrapper focus={props.focus} onScroll={() => setScrolled(true)}>
@@ -39,19 +39,21 @@ export default function Suggestions(props) {
         (suggestion, index) =>
           (index < 10 || scrolled) && (
             <Suggestion
-              key={suggestion.id}
+              key={suggestion.properties.id}
               onClick={() => {
-                props.onChange(suggestion)
-                props.setFocus(false)
+                props.onChange(suggestion);
+                props.setFocus(false);
               }}
               onFocus={() => props.setFocus(true)}
               onBlur={() => props.setFocus(false)}
-              type='button'
+              type="button"
             >
-              <span>{suggestion.place_name_fr}</span>
+              <span>
+                {suggestion.properties.name} {suggestion.properties.context}
+              </span>
             </Suggestion>
           )
       )}
     </Wrapper>
-  )
+  );
 }

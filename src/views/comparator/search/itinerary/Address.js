@@ -73,9 +73,7 @@ export default function Address(props) {
   useEffect(() => {
     if (debouncedSearch && debouncedSearch.length > 2) {
       api
-        .get(
-          `https://api.mapbox.com/geocoding/v5/mapbox.places/${debouncedSearch}.json?proximity=2.3488,48.8534&language=fr&access_token=${process.env.REACT_APP_MAPBOX_API_TOKEN}`
-        )
+        .get(`https://api-adresse.data.gouv.fr/search/?q=${debouncedSearch}`)
         .then((res) => setSuggestions(res.features || []));
     } else {
       setSuggestions([]);
@@ -128,8 +126,8 @@ export default function Address(props) {
             setSearch(suggestion.place_name_fr);
             setItinerary({
               [props.type]: suggestion.place_name_fr,
-              [props.type + "Longitude"]: suggestion.center[0],
-              [props.type + "Latitude"]: suggestion.center[1],
+              [props.type + "Longitude"]: suggestion.geometry.coordinates[0],
+              [props.type + "Latitude"]: suggestion.geometry.coordinates[1],
             });
           }}
         />

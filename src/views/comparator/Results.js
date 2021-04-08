@@ -22,7 +22,7 @@ export default function Results() {
     carpool,
     uncertainty,
   } = useContext(TransportationContext);
-  const { km, itinerary } = useContext(SearchContext);
+  const { itinerary } = useContext(SearchContext);
 
   console.log(itinerary);
 
@@ -31,7 +31,6 @@ export default function Results() {
   console.log(garesFrom, garesTo);
   return (
     <Wrapper>
-      <p>Votre trajet fait à vol d'oiseau {km} km.</p>
       <p>Voici les gares les plus proches</p>
       <h3>Départ</h3>
       <Gares gares={garesFrom} />

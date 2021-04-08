@@ -94,17 +94,6 @@ export default function Address(props) {
         }}
       />
       <InputWrapper type={props.type}>
-        {props.type === "to" && (
-          <Km>
-            <span>
-              ({km}km{" "}
-              <Approximation onClick={() => setApproximation(true)}>
-                à vol d'oiseau
-              </Approximation>
-              )
-            </span>
-          </Km>
-        )}
         <Input
           name={"address"}
           autoComplete="off"

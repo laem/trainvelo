@@ -31,11 +31,12 @@ export default function Results() {
   console.log(garesFrom, garesTo);
   return (
     <Wrapper>
-      <p>Voici les gares les plus proches</p>
+      <p>1️⃣ &nbsp;Voici les gares les plus proches</p>
       <h3>Départ</h3>
       <Gares gares={garesFrom} />
       <h3>Arrivée</h3>
       <Gares gares={garesTo} />
+      <p>2️⃣ &nbsp;La suite n'est pas encore implémentée :)</p>
     </Wrapper>
   );
 }

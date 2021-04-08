@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useContext, useRef } from 'react'
-import styled from 'styled-components'
-import ReactMapGL, { LinearInterpolator } from 'react-map-gl'
-import WebMercatorViewport from '@math.gl/web-mercator'
+import React, { useState, useEffect, useContext, useRef } from "react";
+import styled from "styled-components";
+import ReactMapGL, { LinearInterpolator } from "react-map-gl";
+import WebMercatorViewport from "@math.gl/web-mercator";
 
-import useWindowSize from 'hooks/useWindowSize'
-import SearchContext from 'utils/SearchContext'
+import useWindowSize from "hooks/useWindowSize";
+import SearchContext from "utils/SearchContext";
 
 const Wrapper = styled.div`
   position: fixed;
@@ -17,36 +17,39 @@ const Wrapper = styled.div`
   .mapboxgl-control-container {
     display: none;
   }
-`
+`;
 export default function Map() {
-  const { km, mode, itinerary } = useContext(SearchContext)
+  const { km, mode, itinerary } = useContext(SearchContext);
 
-  const { height, width } = useWindowSize()
+  const { height, width } = useWindowSize();
 
   const [viewport, setViewport] = useState({
     latitude: 48.8159,
     longitude: 2.3061,
     zoom: 11,
-  })
+  });
 
-  const timer = useRef()
+  const timer = useRef();
 
   useEffect(() => {
     timer.current = setTimeout(
       () =>
         Number(km) &&
         setViewport((viewport) =>
-          mode === 'itinerary' && (itinerary.from || itinerary.to)
+          mode === "itinerary" && (itinerary.from || itinerary.to)
             ? new WebMercatorViewport({
                 width,
                 height,
-              }).fitBounds([
+              }).fitBounds(
                 [
-                  Number(itinerary.fromLongitude),
-                  Number(itinerary.fromLatitude),
+                  [
+                    Number(itinerary.fromLongitude),
+                    Number(itinerary.fromLatitude),
+                  ],
+                  [Number(itinerary.toLongitude), Number(itinerary.toLatitude)],
                 ],
-                [Number(itinerary.toLongitude), Number(itinerary.toLatitude)],
-              ])
+                { padding: 200 }
+              )
             : {
                 ...viewport,
                 latitude: 48.8159,
@@ -57,20 +60,20 @@ export default function Map() {
               }
         ),
       500
-    )
-    return () => clearTimeout(timer.current)
-  }, [timer, km, height, width, mode, itinerary])
+    );
+    return () => clearTimeout(timer.current);
+  }, [timer, km, height, width, mode, itinerary]);
 
   return (
     <Wrapper>
       <ReactMapGL
         {...viewport}
-        width='100%'
-        height='100%'
-        mapStyle={'mapbox://styles/florianpanchout/ckkcsfbzm0ab617p8elhz6k8r'}
+        width="100%"
+        height="100%"
+        mapStyle={"mapbox://styles/florianpanchout/ckkcsfbzm0ab617p8elhz6k8r"}
         onViewportChange={setViewport}
         mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_API_TOKEN}
       />
     </Wrapper>
-  )
+  );
 }

@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react'
+import React, { useEffect, useContext } from "react";
 import {
   useQueryParam,
   withDefault,
@@ -6,42 +6,42 @@ import {
   StringParam,
   ObjectParam,
   ArrayParam,
-} from 'use-query-params'
-import * as turf from '@turf/turf'
+} from "use-query-params";
+import * as turf from "@turf/turf";
 
-import SuggestionContext from 'utils/SuggestionContext'
-import SearchContext from 'utils/SearchContext'
+import SuggestionContext from "utils/SuggestionContext";
+import SearchContext from "utils/SearchContext";
 
 export default function SearchProvider(props) {
-  const { suggestions } = useContext(SuggestionContext)
+  const { suggestions } = useContext(SuggestionContext);
 
   const [mode, setMode] = useQueryParam(
-    'mode',
-    withDefault(StringParam, 'distance')
-  )
+    "mode",
+    withDefault(StringParam, "itinerary")
+  );
 
-  const [km, setKm] = useQueryParam('km', withDefault(NumberParam, 10))
+  const [km, setKm] = useQueryParam("km", withDefault(NumberParam, 10));
 
   const [alwaysVisible, setAlwaysVisibile] = useQueryParam(
-    'always',
+    "always",
     withDefault(ArrayParam, [])
-  )
+  );
 
   const [itinerary, setItinerary] = useQueryParam(
-    'itinerary',
+    "itinerary",
     withDefault(ObjectParam, {
-      to: '',
-      toLatitude: '',
-      toLongitude: '',
-      from: '',
-      fromLatitude: '',
-      fromLongitude: '',
+      to: "",
+      toLatitude: "",
+      toLongitude: "",
+      from: "",
+      fromLatitude: "",
+      fromLongitude: "",
     })
-  )
+  );
 
   useEffect(() => {
     if (
-      mode === 'itinerary' &&
+      mode === "itinerary" &&
       itinerary.fromLatitude &&
       itinerary.fromLongitude &&
       itinerary.toLatitude &&
@@ -50,18 +50,17 @@ export default function SearchProvider(props) {
       const from = turf.point([
         Number(itinerary.fromLongitude),
         Number(itinerary.fromLatitude),
-      ])
+      ]);
       const to = turf.point([
         Number(itinerary.toLongitude),
         Number(itinerary.toLatitude),
-      ])
-      const distance = turf.distance(from, to)
-      console.log(distance)
+      ]);
+      const distance = turf.distance(from, to);
       setKm(
         distance > 1 ? Math.round(distance) : Math.round(distance * 100) / 100
-      )
+      );
     }
-  }, [itinerary, setKm, mode])
+  }, [itinerary, setKm, mode]);
 
   return (
     <SearchContext.Provider
@@ -70,11 +69,11 @@ export default function SearchProvider(props) {
         setMode: (newMode) => {
           const newSuggestion = suggestions.find(
             (suggestion) => suggestion.id === Number(newMode)
-          )
+          );
           if (newSuggestion) {
-            setKm(newSuggestion.km)
+            setKm(newSuggestion.km);
           }
-          setMode(newMode)
+          setMode(newMode);
         },
         km,
         setKm,
@@ -83,7 +82,7 @@ export default function SearchProvider(props) {
           setItinerary((prevItinerary) => ({
             ...prevItinerary,
             ...newItinerary,
-          }))
+          }));
         },
         alwaysVisible,
         setAlwaysVisibile,
@@ -91,5 +90,5 @@ export default function SearchProvider(props) {
     >
       {props.children}
     </SearchContext.Provider>
-  )
+  );
 }

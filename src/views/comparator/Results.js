@@ -28,14 +28,15 @@ export default function Results() {
 
   const garesTo = garesProches(gares, itinerary, "to");
   const garesFrom = garesProches(gares, itinerary, "from");
+  console.log(garesFrom, garesTo);
   return (
     <Wrapper>
       <p>Votre trajet fait à vol d'oiseau {km} km.</p>
       <p>Voici les gares les plus proches</p>
       <h3>Départ</h3>
-      <Gares gares={garesTo} />
-      <h3>Arrivée</h3>
       <Gares gares={garesFrom} />
+      <h3>Arrivée</h3>
+      <Gares gares={garesTo} />
     </Wrapper>
   );
 }
@@ -49,7 +50,7 @@ const Gares = ({ gares }) => (
 );
 
 const garesProches = (gares, itinerary, toOrFrom) =>
-  gares.sort(
+  [...gares].sort(
     (g1, g2) =>
       gareDistance(g1, itinerary, toOrFrom) -
       gareDistance(g2, itinerary, toOrFrom)

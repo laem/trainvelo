@@ -17,8 +17,15 @@ const result = data
       département: departemen,
     };
   })
-  .filter((gare) => gare.voyageurs);
+  .filter((gare) => gare.voyageurs)
+  .reduce(
+    (memo, next) =>
+      memo.find((gare) => gare.libelle === next.libelle)
+        ? memo
+        : [...memo, next],
+    []
+  );
 
 fs.writeFileSync("gares.json", JSON.stringify(result));
 
-console.log(result[1], result[2]);
+console.log("first two results", result[1], result[2]);

@@ -19,21 +19,12 @@ const Start = styled.div`
   display: flex;
   margin-bottom: 1.5rem;
 `;
-const End = styled.div`
-  margin-left: 15rem;
-
-  ${(props) => props.theme.mq.small} {
-    align-self: flex-end;
-    margin: 0;
-  }
-`;
 export default function Itinerary() {
   return (
     <Wrapper>
-      <Start>Mon déplacement</Start>
+      <Start>Mon voyage est-il faisable en train + vélo&nbsp;?</Start>
       <Address type="from" />
       <Address type="to" />
-      <End>est-il faisable en train + vélo ?</End>
     </Wrapper>
   );
 }

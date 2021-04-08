@@ -26,27 +26,45 @@ export default function Results() {
 
   console.log(itinerary);
 
-  const gareProche = gares.sort(
-    (g1, g2) => gareDistance(g1, itinerary) - gareDistance(g2, itinerary)
-  );
-
-  console.log(gareProche);
-
+  const garesTo = garesProches(gares, itinerary, "to");
+  const garesFrom = garesProches(gares, itinerary, "from");
   return (
     <Wrapper>
-      Votre trajet fait à vol d'oiseau {km} km.
-      <br />- Super ! Cela me fait une belle jambe !{gareProche[0].libelle}
+      <p>Votre trajet fait à vol d'oiseau {km} km.</p>
+      <p>Voici les gares les plus proches</p>
+      <h3>Départ</h3>
+      <Gares gares={garesTo} />
+      <h3>Arrivée</h3>
+      <Gares gares={garesFrom} />
     </Wrapper>
   );
 }
 
-const gareDistance = (station, itinerary) => {
+const Gares = ({ gares }) => (
+  <ul>
+    {gares.slice(0, 3).map(({ libelle }) => (
+      <li key={libelle}>{libelle}</li>
+    ))}
+  </ul>
+);
+
+const garesProches = (gares, itinerary, toOrFrom) =>
+  gares.sort(
+    (g1, g2) =>
+      gareDistance(g1, itinerary, toOrFrom) -
+      gareDistance(g2, itinerary, toOrFrom)
+  );
+
+const gareDistance = (station, itinerary, toOrFrom) => {
   const [lat, long] = station.coordonnées;
 
-  const from = point([
-    Number(itinerary.toLongitude),
-    Number(itinerary.toLatitude),
+  const attributeLong = toOrFrom + "Longitude";
+  const attributeLat = toOrFrom + "Latitude";
+
+  const A = point([
+    Number(itinerary[attributeLong]),
+    Number(itinerary[attributeLat]),
   ]);
-  const to = point([long, lat]);
-  return distance(from, to);
+  const B = point([long, lat]);
+  return distance(A, B);
 };

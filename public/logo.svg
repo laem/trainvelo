@@ -65,7 +65,7 @@
        x2="83.263367"
        y2="101.00819"
        gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(16.335168,0,0,16.335168,-1266.0028,-1569.5187)" />
+       gradientTransform="matrix(16.335168,0,0,16.335168,-1228.1992,-1572.1237)" />
     <linearGradient
        inkscape:collect="always"
        id="linearGradient994">
@@ -173,9 +173,9 @@
      inkscape:document-rotation="0"
      inkscape:current-layer="layer1"
      inkscape:document-units="mm"
-     inkscape:cy="245.92554"
-     inkscape:cx="444.40331"
-     inkscape:zoom="1"
+     inkscape:cy="285.06627"
+     inkscape:cx="469.00897"
+     inkscape:zoom="0.70710678"
      inkscape:pageshadow="2"
      inkscape:pageopacity="0.0"
      borderopacity="1.0"
@@ -209,14 +209,18 @@
     <ellipse
        style="opacity:1;fill:url(#linearGradient2486);fill-opacity:1;stroke:none;stroke-width:93.5026;stroke-linejoin:round;paint-order:markers stroke fill"
        id="path2466"
-       cx="27.369484"
-       cy="80.467117"
+       cx="65.173111"
+       cy="77.862106"
        rx="66.74897"
-       ry="68.759262" />
+       ry="68.759262"
+       inkscape:export-xdpi="57.07"
+       inkscape:export-ydpi="57.07" />
     <g
        id="g2935"
-       transform="matrix(8.4819342,0.79121006,-0.79121006,8.4819342,-579.95133,-855.77918)"
-       clip-path="url(#clipPath2747)">
+       transform="matrix(8.4819342,0.79121006,-0.79121006,8.4819342,-542.1477,-858.38419)"
+       clip-path="url(#clipPath2747)"
+       inkscape:export-xdpi="57.07"
+       inkscape:export-ydpi="57.07">
       <g
          id="g3186">
         <g
@@ -273,7 +277,9 @@
     </g>
     <g
        id="g2959"
-       transform="matrix(3.4083435,-0.43030469,0.43030469,3.4083435,-712.11775,-358.06848)">
+       transform="matrix(3.4083435,-0.43030469,0.43030469,3.4083435,-674.31412,-360.67349)"
+       inkscape:export-xdpi="57.07"
+       inkscape:export-ydpi="57.07">
       <path
          sodipodi:nodetypes="cccc"
          id="path1328"

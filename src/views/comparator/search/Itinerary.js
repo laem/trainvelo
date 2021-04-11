@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
+import SearchContext from "utils/SearchContext";
 
 import Address from "./itinerary/Address";
 
@@ -19,12 +20,40 @@ const Start = styled.div`
   display: flex;
   margin-bottom: 1.5rem;
 `;
+
 export default function Itinerary() {
+  const { itinerary, setItinerary } = useContext(SearchContext);
   return (
     <Wrapper>
       <Start>Mon voyage est-il faisable en train + vélo&nbsp;?</Start>
       <Address type="from" />
       <Address type="to" />
+      <label>
+        au moins{" "}
+        <ShortNumberInput
+          type="number"
+          onChange={(e) =>
+            setItinerary({ ...itinerary, minBikeKm: e.target.value })
+          }
+          value={itinerary.minBikeKm}
+        />{" "}
+        km à vélo
+      </label>
+      <label>
+        mais au maximum{" "}
+        <ShortNumberInput
+          type="number"
+          value={itinerary.maxBikeKm}
+          onChange={(e) =>
+            setItinerary({ ...itinerary, maxBikeKm: e.target.value })
+          }
+        />{" "}
+        km à vélo
+      </label>
     </Wrapper>
   );
 }
+
+const ShortNumberInput = styled.input`
+  width: 4rem;
+`;

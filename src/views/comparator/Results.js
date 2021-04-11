@@ -49,12 +49,22 @@ const Gares = ({ gares, count = 3 }) => (
   </ul>
 );
 
+var yo = 0;
+
 const garesProches = (gares, itinerary, toOrFrom) =>
-  [...gares].sort(
-    (g1, g2) =>
-      gareDistance(g1, itinerary, toOrFrom) -
-      gareDistance(g2, itinerary, toOrFrom)
-  );
+  gares
+    .map((gare) => ({
+      ...gare,
+      distance: gareDistance(gare, itinerary, toOrFrom),
+    }))
+    .filter((gare) => {
+      console.log(itinerary.maxBikeKm < 40);
+      return (
+        gare.distance > +itinerary.minBikeKm &&
+        gare.distance < +itinerary.maxBikeKm
+      );
+    })
+    .sort((g1, g2) => g1.distance - g2.distance);
 
 const gareDistance = (station, itinerary, toOrFrom) => {
   const [lat, long] = station.coordonnées;

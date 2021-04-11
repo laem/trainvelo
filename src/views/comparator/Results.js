@@ -35,15 +35,15 @@ export default function Results() {
       <h3>Départ</h3>
       <Gares gares={garesFrom} />
       <h3>Arrivée</h3>
-      <Gares gares={garesTo} />
+      <Gares gares={garesTo} count={20} />
       <p>2️⃣ &nbsp;La suite n'est pas encore implémentée :)</p>
     </Wrapper>
   );
 }
 
-const Gares = ({ gares }) => (
+const Gares = ({ gares, count = 3 }) => (
   <ul>
-    {gares.slice(0, 3).map(({ libelle }) => (
+    {gares.slice(0, count).map(({ libelle }) => (
       <li key={libelle}>{libelle}</li>
     ))}
   </ul>

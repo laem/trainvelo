@@ -8,6 +8,7 @@ import SearchContext from "utils/SearchContext";
 import Transportation from "./results/Transportation";
 import gares from "../../gares.json";
 import { distance, point } from "@turf/turf";
+import Emoji from "components/base/Emoji";
 
 const Wrapper = styled.div`
   flex: 1;
@@ -60,27 +61,40 @@ const StationVignette = styled.li`
   margin: 0.6rem;
   box-shadow: 0 1px 3px rgba(41, 117, 209, 0.12),
     0 1px 2px rgba(41, 117, 209, 0.24);
-  padding-left: 1rem;
-  padding-right: 1rem;
+  padding: 0.6rem 1rem;
   will-change: box-shadow;
   -webkit-user-select: text;
   user-select: text;
   transition: box-shadow 0.15s, border-color 0.15s;
   border-radius: 0.3rem;
+  .emoji {
+    font-size: 140%;
+  }
+`;
+
+const StationList = styled.ul`
+  list-style-type: none;
 `;
 
 const Gares = ({ gares, count = 3 }) => (
-  <ul>
+  <StationList>
     {gares.slice(0, count).map(({ libelle, commune, distance }) => (
       <StationVignette key={libelle}>
         <strong>{libelle}</strong>
-        <div>🚴 {Math.round(distance)} km </div>
         <div>
-          {commune.toUpperCase() !== libelle.toUpperCase() && `🏘️ ${commune}`}
+          <Emoji>🚴</Emoji> {Math.round(distance)} km{" "}
+        </div>
+        <div>
+          {commune.toUpperCase() !== libelle.toUpperCase() && (
+            <span>
+              <Emoji>🏘️ </Emoji>&nbsp;
+              {commune}
+            </span>
+          )}
         </div>
       </StationVignette>
     ))}
-  </ul>
+  </StationList>
 );
 
 const garesProches = (gares, itinerary, toOrFrom) =>

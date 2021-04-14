@@ -76,6 +76,7 @@ const StationVignette = styled.li`
 
 const StationList = styled.ul`
   list-style-type: none;
+  max-width: 55%;
 `;
 
 const Gares = ({ gares, count = 3 }) => (

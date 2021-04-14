@@ -5,6 +5,8 @@ import WebMercatorViewport from "@math.gl/web-mercator";
 
 import useWindowSize from "hooks/useWindowSize";
 import SearchContext from "utils/SearchContext";
+import buffer from "@turf/buffer";
+import { point } from "@turf/helpers";
 
 const Wrapper = styled.div`
   position: fixed;
@@ -31,12 +33,31 @@ export default function Map() {
 
   const timer = useRef();
 
+  var from =
+    itinerary.from &&
+    point([+itinerary.fromLongitude, +itinerary.fromLatitude]);
+  var buffered = from && buffer(from, 10, { units: "kilometers", steps: 1 }),
+    bounds = buffered && [
+      buffered.geometry.coordinates[0][0],
+      buffered.geometry.coordinates[0][2],
+    ];
+
+  console.log(buffered, bounds);
+  const defaultViewport = (viewport) => ({
+    ...viewport,
+    latitude: 48.8159,
+    longitude: 2.3061,
+    zoom: Math.log2(25000 / (((km ? km : 1) * 1000) / width)),
+    transitionInterpolator: new LinearInterpolator(),
+    transitionDuration: 600,
+  });
+
   useEffect(() => {
     timer.current = setTimeout(
       () =>
         Number(km) &&
         setViewport((viewport) =>
-          mode === "itinerary" && itinerary.from
+          itinerary.from && itinerary.to
             ? new WebMercatorViewport({
                 width,
                 height,
@@ -46,21 +67,16 @@ export default function Map() {
                     Number(itinerary.fromLongitude),
                     Number(itinerary.fromLatitude),
                   ],
-                  [
-                    Number(itinerary.toLongitude || itinerary.fromLongitude),
-                    Number(itinerary.toLatitude || itinerary?.fromLatitude),
-                  ],
+                  [Number(itinerary.toLongitude), Number(itinerary.toLatitude)],
                 ],
                 { padding: 200 }
               )
-            : {
-                ...viewport,
-                latitude: 48.8159,
-                longitude: 2.3061,
-                zoom: Math.log2(25000 / (((km ? km : 1) * 1000) / width)),
-                transitionInterpolator: new LinearInterpolator(),
-                transitionDuration: 600,
-              }
+            : itinerary.from
+            ? new WebMercatorViewport({
+                width,
+                height,
+              }).fitBounds(bounds, { padding: 200 })
+            : defaultViewport(viewport)
         ),
       500
     );

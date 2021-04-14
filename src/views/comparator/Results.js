@@ -25,6 +25,8 @@ export default function Results() {
   } = useContext(TransportationContext);
   const { itinerary } = useContext(SearchContext);
 
+  console.log("ITI", itinerary);
+
   const garesTo = garesProches(gares, itinerary, "to");
   const garesFrom = garesProches(gares, itinerary, "from");
   console.log(garesFrom, garesTo);

@@ -23,7 +23,9 @@ export default function TextInput(props) {
       type={props.type}
       value={props.value}
       width={String(props.value).length}
-      onChange={(e) => props.onChange(e.target.value)}
+      onChange={(e) =>
+        props.onChange(e.target.value === "" ? null : e.target.value)
+      }
       onFocus={props.onFocus}
       onBlur={props.onBlur}
     />

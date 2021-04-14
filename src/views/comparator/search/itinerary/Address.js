@@ -125,7 +125,7 @@ export default function Address(props) {
               ]);
             setSearch(suggestion.place_name_fr);
             setItinerary({
-              [props.type]: suggestion.place_name_fr,
+              [props.type]: suggestion.properties.label,
               [props.type + "Longitude"]: suggestion.geometry.coordinates[0],
               [props.type + "Latitude"]: suggestion.geometry.coordinates[1],
             });

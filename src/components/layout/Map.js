@@ -36,7 +36,7 @@ export default function Map() {
       () =>
         Number(km) &&
         setViewport((viewport) =>
-          mode === "itinerary" && (itinerary.from || itinerary.to)
+          mode === "itinerary" && itinerary.from
             ? new WebMercatorViewport({
                 width,
                 height,
@@ -46,7 +46,10 @@ export default function Map() {
                     Number(itinerary.fromLongitude),
                     Number(itinerary.fromLatitude),
                   ],
-                  [Number(itinerary.toLongitude), Number(itinerary.toLatitude)],
+                  [
+                    Number(itinerary.toLongitude || itinerary.fromLongitude),
+                    Number(itinerary.toLatitude || itinerary?.fromLatitude),
+                  ],
                 ],
                 { padding: 200 }
               )

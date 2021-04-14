@@ -42,7 +42,9 @@ export default function Suggestions(props) {
             <Suggestion
               key={suggestion.properties.id}
               onClick={() => {
-                props.onChange(suggestion);
+                props.onChange(
+                  console.log("suggestion selected", suggestion) || suggestion
+                );
                 props.setFocus(false);
               }}
               onFocus={() => props.setFocus(true)}

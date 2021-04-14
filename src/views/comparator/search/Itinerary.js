@@ -55,5 +55,5 @@ export default function Itinerary() {
 }
 
 const ShortNumberInput = styled.input`
-  width: 4rem;
+  width: 5.5rem;
 `;

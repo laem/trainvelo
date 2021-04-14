@@ -1,16 +1,16 @@
-import { createGlobalStyle } from 'styled-components'
-import styledNormalize from 'styled-normalize'
+import { createGlobalStyle } from "styled-components";
+import styledNormalize from "styled-normalize";
 
 export const themes = {
   default: {
-    name: 'Défaut',
+    name: "Défaut",
     colors: {
-      main: '#FF6495',
-      second: '#411AB7',
-      ter: '#78FFF1',
-      quad: '#FF6495',
-      background: '#411AB7',
-      text: '#F8F9FA',
+      main: "#00b894",
+      second: "#6c5ce7",
+      ter: "#78FFF1",
+      quad: "#00b894",
+      background: "#6c5ce7",
+      text: "#333",
     },
     fonts: {
       body: '"Montserrat Alternates", sans-serif',
@@ -26,14 +26,14 @@ export const themes = {
     },
   },
   classic: {
-    name: 'Classique',
+    name: "Classique",
     colors: {
-      main: '#32337B',
-      second: '#ffffff',
-      ter: '#32337B',
-      quad: '#ffffff',
-      background: '#ffffff',
-      text: '#32337B',
+      main: "#32337B",
+      second: "#ffffff",
+      ter: "#32337B",
+      quad: "#ffffff",
+      background: "#ffffff",
+      text: "#32337B",
     },
     fonts: {
       body: '"Montserrat Alternates", sans-serif',
@@ -49,14 +49,14 @@ export const themes = {
     },
   },
   night: {
-    name: 'Nuit',
+    name: "Nuit",
     colors: {
-      main: '#ffffff',
-      second: '#1e1e1e',
-      ter: '#ffffff',
-      quad: '#1e1e1e',
-      background: '#1e1e1e',
-      text: '#ffffff',
+      main: "#ffffff",
+      second: "#1e1e1e",
+      ter: "#ffffff",
+      quad: "#1e1e1e",
+      background: "#1e1e1e",
+      text: "#ffffff",
     },
     fonts: {
       body: '"Montserrat Alternates", sans-serif',
@@ -72,14 +72,14 @@ export const themes = {
     },
   },
   simple: {
-    name: 'Simple',
+    name: "Simple",
     colors: {
-      main: '#1e1e1e',
-      second: '#ffffff',
-      ter: '#1e1e1e',
-      quad: '#ffffff',
-      background: '#ffffff',
-      text: '#1e1e1e',
+      main: "#1e1e1e",
+      second: "#ffffff",
+      ter: "#1e1e1e",
+      quad: "#ffffff",
+      background: "#ffffff",
+      text: "#1e1e1e",
     },
     fonts: {
       body: '"Montserrat Alternates", sans-serif',
@@ -94,7 +94,7 @@ export const themes = {
       xlarge: `@media screen and (min-width: ${2000}px)`,
     },
   },
-}
+};
 
 export const GlobalStyle = createGlobalStyle`
   ${styledNormalize}
@@ -121,7 +121,7 @@ export const GlobalStyle = createGlobalStyle`
     margin-top: 0;
     box-sizing: inherit;
 
-    ${(props) => props.theme.name !== 'Défaut' && 'box-shadow: none!important'};
+    ${(props) => props.theme.name !== "Défaut" && "box-shadow: none!important"};
   }
 
   #root {
@@ -145,4 +145,4 @@ export const GlobalStyle = createGlobalStyle`
   a {
     color: ${(props) => props.theme.colors.main};
   }
-`
+`;

@@ -5,12 +5,13 @@ export const themes = {
   default: {
     name: "Défaut",
     colors: {
-      main: "#00b894",
+      main: "#30336b",
       second: "#6c5ce7",
       ter: "#78FFF1",
-      quad: "#00b894",
+      quad: "#30336b",
       background: "#6c5ce7",
       text: "#333",
+      textOverMain: "#eee",
     },
     fonts: {
       body: '"Montserrat Alternates", sans-serif',

@@ -11,7 +11,8 @@ const Suggestion = styled.button`
   width: 100%;
   padding: 0.5rem 0.6em;
   text-align: left;
-  color: ${(props) => props.theme.colors.text};
+  color: ${(props) =>
+    props.theme.colors.textOverMain || props.theme.colors.text};
   background-color: transparent;
   border: none;
   cursor: pointer;

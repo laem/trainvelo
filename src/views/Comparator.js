@@ -30,7 +30,6 @@ export default function Comparator(props) {
     <>
       <Search iframe={props.iframe} />
       <Results />
-      <Disclaimer>La méthode sera décrite ici un jour.</Disclaimer>
     </>
   );
 }

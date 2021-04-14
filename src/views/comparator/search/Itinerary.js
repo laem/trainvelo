@@ -28,31 +28,39 @@ export default function Itinerary() {
       <Start>Mon voyage est-il faisable en train + vélo&nbsp;?</Start>
       <Address type="from" />
       <Address type="to" />
-      <label>
-        au moins{" "}
-        <ShortNumberInput
-          type="number"
-          onChange={(e) =>
-            setItinerary({ ...itinerary, minBikeKm: e.target.value })
-          }
-          value={itinerary.minBikeKm}
-        />{" "}
-        km à vélo
-      </label>
-      <label>
-        mais au maximum{" "}
-        <ShortNumberInput
-          type="number"
-          value={itinerary.maxBikeKm}
-          onChange={(e) =>
-            setItinerary({ ...itinerary, maxBikeKm: e.target.value })
-          }
-        />{" "}
-        km à vélo
-      </label>
+      {itinerary.toLatitude && itinerary.fromLatitude && (
+        <BikeDistance {...{ itinerary, setItinerary }} />
+      )}
     </Wrapper>
   );
 }
+
+const BikeDistance = ({ itinerary, setItinerary }) => (
+  <div>
+    <label>
+      au moins{" "}
+      <ShortNumberInput
+        type="number"
+        onChange={(e) =>
+          setItinerary({ ...itinerary, minBikeKm: e.target.value })
+        }
+        value={itinerary.minBikeKm}
+      />{" "}
+      km à vélo
+    </label>
+    <label>
+      mais au maximum{" "}
+      <ShortNumberInput
+        type="number"
+        value={itinerary.maxBikeKm}
+        onChange={(e) =>
+          setItinerary({ ...itinerary, maxBikeKm: e.target.value })
+        }
+      />{" "}
+      km à vélo
+    </label>
+  </div>
+);
 
 const ShortNumberInput = styled.input`
   width: 5.5rem;

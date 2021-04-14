@@ -24,15 +24,29 @@ export default function Results() {
   } = useContext(TransportationContext);
   const { itinerary } = useContext(SearchContext);
 
-  console.log(itinerary);
-
   const garesTo = garesProches(gares, itinerary, "to");
   const garesFrom = garesProches(gares, itinerary, "from");
   console.log(garesFrom, garesTo);
+  if (!itinerary.fromLatitude || itinerary.fromLatitude === "") {
+    return (
+      <div>
+        Renseignez un départ pour que l'on puisse choisir la gare de départ
+      </div>
+    );
+  }
+  if (itinerary.fromLatitude && !itinerary.toLatitude) {
+    return (
+      <div>
+        <h3>📍 Les gares à proximité </h3>
+        <Gares gares={garesFrom} count={6} />
+      </div>
+    );
+  }
   return (
     <Wrapper>
       <p>1️⃣ &nbsp;Voici les gares les plus proches</p>
       <h3>Départ</h3>
+
       <Gares gares={garesFrom} />
       <h3>Arrivée</h3>
       <Gares gares={garesTo} count={20} />
@@ -41,15 +55,33 @@ export default function Results() {
   );
 }
 
+const StationVignette = styled.li`
+  background-color: ${(props) => props.theme.colors.second};
+  margin: 0.6rem;
+  box-shadow: 0 1px 3px rgba(41, 117, 209, 0.12),
+    0 1px 2px rgba(41, 117, 209, 0.24);
+  padding-left: 1rem;
+  padding-right: 1rem;
+  will-change: box-shadow;
+  -webkit-user-select: text;
+  user-select: text;
+  transition: box-shadow 0.15s, border-color 0.15s;
+  border-radius: 0.3rem;
+`;
+
 const Gares = ({ gares, count = 3 }) => (
   <ul>
-    {gares.slice(0, count).map(({ libelle }) => (
-      <li key={libelle}>{libelle}</li>
+    {gares.slice(0, count).map(({ libelle, commune, distance }) => (
+      <StationVignette key={libelle}>
+        <strong>{libelle}</strong>
+        <div>🚴 {Math.round(distance)} km </div>
+        <div>
+          {commune.toUpperCase() !== libelle.toUpperCase() && `🏘️ ${commune}`}
+        </div>
+      </StationVignette>
     ))}
   </ul>
 );
-
-var yo = 0;
 
 const garesProches = (gares, itinerary, toOrFrom) =>
   gares
@@ -58,11 +90,10 @@ const garesProches = (gares, itinerary, toOrFrom) =>
       distance: gareDistance(gare, itinerary, toOrFrom),
     }))
     .filter((gare) => {
-      console.log(itinerary.maxBikeKm < 40);
-      return (
-        gare.distance > +itinerary.minBikeKm &&
-        gare.distance < +itinerary.maxBikeKm
-      );
+      return toOrFrom === "to"
+        ? gare.distance > +itinerary.minBikeKm &&
+            gare.distance < +itinerary.maxBikeKm
+        : true;
     })
     .sort((g1, g2) => g1.distance - g2.distance);
 

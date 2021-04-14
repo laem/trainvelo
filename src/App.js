@@ -6,7 +6,6 @@ import { GlobalStyle } from "utils/styles";
 import StyleProvider from "components/providers/StyleProvider";
 import ModalProvider from "components/providers/ModalProvider";
 import UXProvider from "components/providers/UXProvider";
-import TransportationProvider from "components/providers/TransportationProvider";
 import SuggestionProvider from "components/providers/SuggestionProvider";
 import SearchProvider from "components/providers/SearchProvider";
 
@@ -25,29 +24,27 @@ function App() {
         <UXProvider>
           <StyleProvider>
             <ModalProvider>
-              <TransportationProvider>
-                <SuggestionProvider>
-                  <SearchProvider>
-                    <GlobalStyle />
-                    <Switch>
-                      <Route path="/embed">
-                        <Iframe>
-                          <Comparator iframe />
-                        </Iframe>
-                      </Route>
-                      <Route>
-                        <Web>
-                          <Switch>
-                            <Route path="/">
-                              <Comparator />
-                            </Route>
-                          </Switch>
-                        </Web>
-                      </Route>
-                    </Switch>
-                  </SearchProvider>
-                </SuggestionProvider>
-              </TransportationProvider>
+              <SuggestionProvider>
+                <SearchProvider>
+                  <GlobalStyle />
+                  <Switch>
+                    <Route path="/embed">
+                      <Iframe>
+                        <Comparator iframe />
+                      </Iframe>
+                    </Route>
+                    <Route>
+                      <Web>
+                        <Switch>
+                          <Route path="/">
+                            <Comparator />
+                          </Route>
+                        </Switch>
+                      </Web>
+                    </Route>
+                  </Switch>
+                </SearchProvider>
+              </SuggestionProvider>
             </ModalProvider>
           </StyleProvider>
         </UXProvider>

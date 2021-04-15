@@ -9,9 +9,8 @@ import Itinerary from "./search/Itinerary";
 
 const Wrapper = styled.div`
   position: relative;
-  padding: ${(props) => (props.iframe ? "3rem" : "6vh")} 0
-    ${(props) =>
-      props.iframe ? "3rem" : props.mode === "itinerary" ? "2vh" : "6vh"};
+  padding: 1vh 0;
+
   font-size: 2rem;
   font-weight: 700;
 

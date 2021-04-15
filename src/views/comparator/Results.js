@@ -34,7 +34,23 @@ export default function Results() {
   if (!itinerary.fromLatitude || itinerary.fromLatitude === "") {
     return (
       <div>
-        Renseignez un départ pour que l'on puisse choisir la gare de départ
+        <p>
+          Renseignez un départ pour que l'on puisse choisir la gare de départ
+        </p>
+        <br />
+        <br />
+        <p>
+          <Emoji size="160%">🚧</Emoji> Attention, ceci n'est qu'une ébauche de
+          projet.{" "}
+        </p>
+        <p>
+          Rendez-vous sur{" "}
+          <a href="https://github.com/laem/trainvelo/releases">
+            {" "}
+            github.com/laem/trainvelo
+          </a>{" "}
+          pour participer .
+        </p>
       </div>
     );
   }

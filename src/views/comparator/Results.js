@@ -9,6 +9,7 @@ import Transportation from "./results/Transportation";
 import gares from "../../gares.json";
 import { distance, point } from "@turf/turf";
 import Emoji from "components/base/Emoji";
+import getStation from "./wikidata";
 
 const Wrapper = styled.div`
   flex: 1;
@@ -40,7 +41,7 @@ export default function Results() {
   if (itinerary.fromLatitude && !itinerary.toLatitude) {
     return (
       <div>
-        <h3>📍 Les gares à proximité </h3>
+        <h3>📍 Les gares à proximité du départ</h3>
         <Gares gares={garesFrom} count={6} />
       </div>
     );
@@ -59,11 +60,12 @@ export default function Results() {
 }
 
 const StationVignette = styled.li`
-  background-color: ${(props) => props.theme.colors.second};
+  border: 4px solid ${(props) => props.theme.colors.second};
+  background: #ffffff9e;
   margin: 0.6rem;
   box-shadow: 0 1px 3px rgba(41, 117, 209, 0.12),
     0 1px 2px rgba(41, 117, 209, 0.24);
-  padding: 0.6rem 1rem;
+  padding: 0.6rem;
   will-change: box-shadow;
   -webkit-user-select: text;
   user-select: text;
@@ -72,17 +74,26 @@ const StationVignette = styled.li`
   .emoji {
     font-size: 140%;
   }
+  display: flex;
+  justify-content: space-between;
 `;
 
 const StationList = styled.ul`
   list-style-type: none;
-  max-width: 55%;
 `;
 
-const Gares = ({ gares, count = 3 }) => (
-  <StationList>
-    {gares.slice(0, count).map(({ libelle, commune, distance }) => (
-      <StationVignette key={libelle}>
+const Station = ({ libelle, commune, distance, uic }) => {
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    getStation(uic.slice(0, -1)).then((json) =>
+      setData(json?.results?.bindings[0])
+    );
+  }, [uic]);
+
+  return (
+    <StationVignette key={libelle}>
+      <div>
         <strong>{libelle}</strong>
         <div>
           <Emoji>🚴</Emoji> {Math.round(distance)} km{" "}
@@ -95,7 +106,20 @@ const Gares = ({ gares, count = 3 }) => (
             </span>
           )}
         </div>
-      </StationVignette>
+      </div>
+      <div>{data?.pic && <StationImage src={data.pic.value} />}</div>
+    </StationVignette>
+  );
+};
+
+const StationImage = styled.img`
+  max-width: 8rem;
+`;
+
+const Gares = ({ gares, count = 3 }) => (
+  <StationList>
+    {gares.slice(0, count).map((station) => (
+      <Station {...station} />
     ))}
   </StationList>
 );

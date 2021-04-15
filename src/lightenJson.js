@@ -6,7 +6,7 @@ let data = JSON.parse(rawdata);
 const result = data
   .map((gare) => {
     const {
-      fields: { c_geo, commune, libelle, voyageurs, departemen },
+      fields: { c_geo, commune, libelle, voyageurs, departemen, code_uic },
     } = gare;
 
     return {
@@ -15,6 +15,7 @@ const result = data
       libelle,
       voyageurs: voyageurs === "O",
       département: departemen,
+      uic: code_uic,
     };
   })
   .filter((gare) => gare.voyageurs)

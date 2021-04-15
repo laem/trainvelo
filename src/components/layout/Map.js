@@ -47,7 +47,7 @@ export default function Map() {
     ...viewport,
     latitude: 48.8159,
     longitude: 2.3061,
-    zoom: Math.log2(25000 / (((km ? km : 1) * 1000) / width)),
+    zoom: 5,
     transitionInterpolator: new LinearInterpolator(),
     transitionDuration: 600,
   });

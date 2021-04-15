@@ -49,6 +49,7 @@ const BikeDistance = ({ itinerary, setItinerary }) => (
       km à vélo
     </label>
     <label>
+      {" "}
       mais au maximum{" "}
       <ShortNumberInput
         type="number"

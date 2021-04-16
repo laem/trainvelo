@@ -128,7 +128,7 @@ export default function Learning() {
         </ButtonWrapper>
         <Text>
           Si vous souhaitez aller plus loin dans votre démarche, vous pouvez
-          calculer votre empreinte sur le climat grace à le simulateur{" "}
+          calculer votre empreinte sur le climat grâce au simulateur{" "}
           <a
             href={"https://nosgestesclimat.fr/"}
             target="_blank"

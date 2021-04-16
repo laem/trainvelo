@@ -25,6 +25,8 @@ export default function Map() {
 
   const { height, width } = useWindowSize();
 
+  console.log(height, width);
+
   const [viewport, setViewport] = useState({
     latitude: 48.8159,
     longitude: 2.3061,
@@ -36,7 +38,7 @@ export default function Map() {
   var from =
     itinerary.from &&
     point([+itinerary.fromLongitude, +itinerary.fromLatitude]);
-  var buffered = from && buffer(from, 10, { units: "kilometers", steps: 1 }),
+  var buffered = from && buffer(from, 20, { units: "kilometers", steps: 1 }),
     bounds = buffered && [
       buffered.geometry.coordinates[0][0],
       buffered.geometry.coordinates[0][2],
@@ -75,7 +77,7 @@ export default function Map() {
             ? new WebMercatorViewport({
                 width,
                 height,
-              }).fitBounds(bounds, { padding: 200 })
+              }).fitBounds(bounds, { padding: 0 })
             : defaultViewport(viewport)
         ),
       500

@@ -1638,6 +1638,50 @@
     ejs "^2.6.1"
     magic-string "^0.25.0"
 
+"@svgmoji/blob@^3.1.0":
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/@svgmoji/blob/-/blob-3.1.0.tgz#966946d47c1704c17e795e56ba3eeb0b8db131f7"
+  integrity sha512-aVr3AUqEaHjr+HibPKNnL3p91mv2MwnkJc/ARsYF050rSRLbzPIIyw8M5k45owm/en2ukfanfvgYLXq5cbgsiQ==
+  dependencies:
+    "@babel/runtime" "^7.12.5"
+    "@svgmoji/core" "^3.1.0"
+
+"@svgmoji/core@^3.1.0":
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/@svgmoji/core/-/core-3.1.0.tgz#82161003e7be946927e4552f0544ddd1c9e44005"
+  integrity sha512-iztEW4uyavGbmd2/iKw+t2uc+53HLlkuJ2BAtEXhf1eCoY48+Ah4DvIzIIr1bcqr+fXrCQPG0o6AxjeceqB3Xg==
+  dependencies:
+    "@babel/runtime" "^7.12.5"
+    emojibase "^5.1.0"
+    emojibase-regex "^5.1.1"
+    idb-keyval "^5.0.2"
+    match-sorter "^6.2.0"
+    type-fest "^0.20 || ^0.21"
+
+"@svgmoji/noto@^3.1.0":
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/@svgmoji/noto/-/noto-3.1.0.tgz#79bbccf1c68f4681af734a6460a4bb6a94d5f377"
+  integrity sha512-Xc2cJ7gqHkEpWk6m7zLjP2pKcYxNdQxjPmkPFMLrZfYQnzpteEgyiKXNfLidwqgY0shz6+MxIa8gWHdLVKwAEA==
+  dependencies:
+    "@babel/runtime" "^7.12.5"
+    "@svgmoji/core" "^3.1.0"
+
+"@svgmoji/openmoji@^3.1.0":
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/@svgmoji/openmoji/-/openmoji-3.1.0.tgz#d8a6e2497688749ece789cbbd37c34b1e03fea01"
+  integrity sha512-8FpVItrNhQKWYlUJReVbpmSKOpLBdkLpk2c/GHp1ynMZNeyV16GGL2NaUOqj2Nhp3Qgqb7datmGNHIun/tQEaw==
+  dependencies:
+    "@babel/runtime" "^7.12.5"
+    "@svgmoji/core" "^3.1.0"
+
+"@svgmoji/twemoji@^3.1.0":
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/@svgmoji/twemoji/-/twemoji-3.1.0.tgz#65c059edbc1fddcdea4b5adc55b7b55fcf163f38"
+  integrity sha512-7xbBE/7Hkr8oOuWIAP4WoP2ZjocOcO9aOIvr7ffKMVJ+exVUtIH5aE3h+4unZo92dzLkugmfEH9TAuwQO42cPQ==
+  dependencies:
+    "@babel/runtime" "^7.12.5"
+    "@svgmoji/core" "^3.1.0"
+
 "@svgr/babel-plugin-add-jsx-attribute@^5.4.0":
   version "5.4.0"
   resolved "https://registry.yarnpkg.com/@svgr/babel-plugin-add-jsx-attribute/-/babel-plugin-add-jsx-attribute-5.4.0.tgz"
@@ -5799,6 +5843,16 @@ emoji-regex@^9.0.0:
   resolved "https://registry.yarnpkg.com/emoji-regex/-/emoji-regex-9.2.0.tgz"
   integrity sha512-DNc3KFPK18bPdElMJnf/Pkv5TXhxFU3YFDEuGLDRtPmV4rkmCjBkCSEp22u6rBHdSN9Vlp/GK7k98prmE1Jgug==
 
+emojibase-regex@^5.1.1:
+  version "5.1.2"
+  resolved "https://registry.yarnpkg.com/emojibase-regex/-/emojibase-regex-5.1.2.tgz#96cc95e26b186866de1c42a16782d3242cc29c11"
+  integrity sha512-/n1k9npdzvJecnTy7qu324btGxWSi4GC4Uk9R4DLDc8CIuNx+a2RQLrDSL/0kOi0dIg4lP4h65wKICYGjyIDbw==
+
+emojibase@^5.1.0:
+  version "5.1.1"
+  resolved "https://registry.yarnpkg.com/emojibase/-/emojibase-5.1.1.tgz#fe812023959cb60d0b1b6da16042b180c96c2b7c"
+  integrity sha512-qc/qfuzZ93xmYMhnVA15yP2k3t4zJvBbqCc8dpDXFf75eJ+IogbzJuWQur8fkwsZ0u7YvJDBh939F9DapQqktQ==
+
 emojis-list@^2.0.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/emojis-list/-/emojis-list-2.1.0.tgz"
@@ -7297,6 +7351,11 @@ icss-utils@^4.0.0, icss-utils@^4.1.1:
   dependencies:
     postcss "^7.0.14"
 
+idb-keyval@^5.0.2:
+  version "5.0.5"
+  resolved "https://registry.yarnpkg.com/idb-keyval/-/idb-keyval-5.0.5.tgz#1b02984dcf42ad4aa290bf9f10935b485419df34"
+  integrity sha512-cqi65rrjhgPExI9vmSU7VcYEbHCUfIBY+9YUWxyr0PyGizptFgGFnvZQ0w+tqOXk1lUcGCZGVLfabf7QnR2S0g==
+
 identity-obj-proxy@3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/identity-obj-proxy/-/identity-obj-proxy-3.0.0.tgz"
@@ -8765,6 +8824,14 @@ mapbox@^1.0.0-beta10:
   dependencies:
     es6-promise "^4.0.5"
     rest "^2.0.0"
+
+match-sorter@^6.2.0:
+  version "6.3.0"
+  resolved "https://registry.yarnpkg.com/match-sorter/-/match-sorter-6.3.0.tgz#454a1b31ed218cddbce6231a0ecb5fdc549fed01"
+  integrity sha512-efYOf/wUpNb8FgNY+cOD2EIJI1S5I7YPKsw0LBp7wqPh5pmMS6i/wr3ZWwfwrAw1NvqTA2KUReVRWDX84lUcOQ==
+  dependencies:
+    "@babel/runtime" "^7.12.5"
+    remove-accents "0.4.2"
 
 md5.js@^1.3.4:
   version "1.3.5"
@@ -11184,6 +11251,11 @@ rematrix@0.2.2:
   resolved "https://registry.yarnpkg.com/rematrix/-/rematrix-0.2.2.tgz"
   integrity sha512-agFFS3RzrLXJl5LY5xg/xYyXvUuVAnkhgKO7RaO9J1Ssth6yvbO+PIiV67V59MB5NCdAK2flvGvNT4mdKVniFA==
 
+remove-accents@0.4.2:
+  version "0.4.2"
+  resolved "https://registry.yarnpkg.com/remove-accents/-/remove-accents-0.4.2.tgz#0a43d3aaae1e80db919e07ae254b285d9e1c7bb5"
+  integrity sha1-CkPTqq4egNuRngeuJUsoXZ4ce7U=
+
 remove-trailing-separator@^1.0.1:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/remove-trailing-separator/-/remove-trailing-separator-1.1.0.tgz"
@@ -12315,6 +12387,18 @@ svg-parser@^2.0.2:
   resolved "https://registry.yarnpkg.com/svg-parser/-/svg-parser-2.0.4.tgz"
   integrity sha512-e4hG1hRwoOdRb37cIMSgzNsxyzKfayW6VOflrwvR+/bzrkyxY/31WkbgnQpgtrNp1SdpJvpUAGTa/ZoiPNDuRQ==
 
+svgmoji@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/svgmoji/-/svgmoji-3.1.0.tgz#e87597efa100801da1222472fe27a6f4127ac500"
+  integrity sha512-rCo+0x7LOj46Lq20UOevrBVFsv9VE6X6Jxp2RjSStSy0d3G7JoE/pyLbcDopW7PlezsjH1x2+PlfsC2PcWL3KA==
+  dependencies:
+    "@babel/runtime" "^7.12.5"
+    "@svgmoji/blob" "^3.1.0"
+    "@svgmoji/core" "^3.1.0"
+    "@svgmoji/noto" "^3.1.0"
+    "@svgmoji/openmoji" "^3.1.0"
+    "@svgmoji/twemoji" "^3.1.0"
+
 svgo@^1.0.0, svgo@^1.2.2:
   version "1.3.2"
   resolved "https://registry.yarnpkg.com/svgo/-/svgo-1.3.2.tgz"
@@ -12732,6 +12816,11 @@ type-fest@^0.11.0:
   version "0.11.0"
   resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-0.11.0.tgz"
   integrity sha512-OdjXJxnCN1AvyLSzeKIgXTXxV+99ZuXl3Hpo9XpJAv9MBcHrrJOQ5kV7ypXOuQie+AmWG25hLbiKdwYTifzcfQ==
+
+"type-fest@^0.20 || ^0.21":
+  version "0.21.3"
+  resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-0.21.3.tgz#d260a24b0198436e133fa26a524a6d65fa3b2e37"
+  integrity sha512-t0rzBq87m3fVcduHDUFhKmyyX+9eo6WQjZvf51Ea/M0Q7+T374Jp1aUiyUl0GKxp8M/OETVHSDvmkyPgvX+X2w==
 
 type-fest@^0.3.1:
   version "0.3.1"

@@ -45,7 +45,7 @@ const Station = ({ libelle, commune, distance, uic }) => {
         <div>
           {commune.toUpperCase() !== libelle.toUpperCase() && (
             <span>
-              <Emoji>🏘️ </Emoji>&nbsp;
+              <Emoji e="E203"></Emoji>&nbsp;
               {commune}
             </span>
           )}

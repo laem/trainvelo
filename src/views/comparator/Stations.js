@@ -20,14 +20,17 @@ const StationVignette = styled.li`
   }
   display: flex;
   justify-content: space-between;
+  cursor: pointer;
 `;
 
 const StationList = styled.ul`
   list-style-type: none;
 `;
 
-const Station = ({ libelle, commune, distance, uic }) => {
+const Station = ({ station, onClick }) => {
   const [data, setData] = useState(null);
+
+  const { libelle, commune, distance, uic } = station;
 
   useEffect(() => {
     getStation(uic.slice(0, -1)).then((json) =>
@@ -36,7 +39,7 @@ const Station = ({ libelle, commune, distance, uic }) => {
   }, [uic]);
 
   return (
-    <StationVignette key={libelle}>
+    <StationVignette key={libelle} onClick={() => onClick(uic)}>
       <div>
         <strong>{libelle}</strong>
         <div>
@@ -60,10 +63,10 @@ const StationImage = styled.img`
   max-width: 8rem;
 `;
 
-export const Stations = ({ gares, count = 3 }) => (
+export const Stations = ({ gares, count = 3, onClick }) => (
   <StationList>
     {gares.slice(0, count).map((station) => (
-      <Station {...station} />
+      <Station {...{ station, onClick }} />
     ))}
   </StationList>
 );

@@ -38,7 +38,7 @@ export default function SearchProvider(props) {
       fromLongitude: "",
       maxBikeKm: 50,
       minBikeKm: 3,
-      fromStation: null,
+      fromStation: "",
     })
   );
 

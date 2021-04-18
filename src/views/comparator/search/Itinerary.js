@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
 import SearchContext from "utils/SearchContext";
+import Emoji from "components/base/Emoji";
+import gares from "../../../gares.json";
 
 import Address from "./itinerary/Address";
 
@@ -27,6 +29,12 @@ export default function Itinerary() {
     <Wrapper>
       <Start>Mon voyage est-il faisable en train + vélo&nbsp;?</Start>
       <Address type="from" />
+      {itinerary.fromStation?.length > 0 && (
+        <p>
+          <Emoji e="🚉" /> Gare choisie :{" "}
+          {gares.find(({ uic }) => uic === itinerary.fromStation).libelle}
+        </p>
+      )}
       <Address type="to" />
       {itinerary.toLatitude && itinerary.fromLatitude && (
         <BikeDistance {...{ itinerary, setItinerary }} />

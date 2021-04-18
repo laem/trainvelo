@@ -43,7 +43,8 @@ const Station = ({ station, onClick }) => {
       <div>
         <strong>{libelle}</strong>
         <div>
-          <Emoji>🕊️</Emoji> {Math.round(distance)} km{" "}
+          <Emoji e="E244" />
+          {Math.round(distance)} km <Emoji>🕊️</Emoji>
         </div>
         <div>
           {commune.toUpperCase() !== libelle.toUpperCase() && (

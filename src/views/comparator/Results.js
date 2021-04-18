@@ -11,6 +11,8 @@ import { distance, point } from "@turf/turf";
 import Emoji from "components/base/Emoji";
 import { Stations } from "./Stations";
 
+export const filledParam = (s) => s != null && s !== "";
+
 const Wrapper = styled.div`
   flex: 1;
   position: relative;
@@ -33,9 +35,8 @@ export default function Results() {
   if (!itinerary.fromLatitude || itinerary.fromLatitude === "") {
     return (
       <div>
-        <p>
-          Renseignez un départ pour que l'on puisse choisir la gare de départ
-        </p>
+        <p></p>
+        <h3>📍 Renseignez une adresse de départ.</h3>
         <br />
         <br />
         <p>
@@ -53,10 +54,16 @@ export default function Results() {
       </div>
     );
   }
-  if (itinerary.fromLatitude && !itinerary.toLatitude) {
+  if (
+    filledParam(itinerary.fromLatitude) &&
+    !filledParam(itinerary.fromStation) &&
+    !itinerary.toLatitude
+  ) {
     return (
       <div>
-        <h3>📍 Les gares à proximité du départ</h3>
+        <h3>
+          <Emoji e="🚉" /> Choissiez votre gare de départ
+        </h3>
         <Stations
           gares={garesFrom}
           count={6}
@@ -67,22 +74,40 @@ export default function Results() {
       </div>
     );
   }
-  return (
-    <Wrapper>
-      <p>
-        <Emoji e="1️⃣" /> Voici les gares les plus proches
-      </p>
-      <h3>Départ</h3>
 
-      <Stations gares={garesFrom} />
-      <h3>Arrivée</h3>
-      <Stations gares={garesTo} count={20} />
-      <p>
-        <Emoji e="1️⃣" />
-        La suite n'est pas encore implémentée :)
-      </p>
-    </Wrapper>
+  console.log("ITI", itinerary);
+  console.log(
+    filledParam(itinerary.fromLatitude),
+    filledParam(itinerary.fromStation),
+    !filledParam(itinerary.toLatitude)
   );
+
+  if (
+    filledParam(itinerary.fromLatitude) &&
+    filledParam(itinerary.fromStation) &&
+    !filledParam(itinerary.toLatitude)
+  ) {
+    return (
+      <div>
+        <h3>📍 Saisissez votre adresse d'arrivée</h3>
+      </div>
+    );
+  }
+
+  if (
+    filledParam(itinerary.fromLatitude) &&
+    filledParam(itinerary.fromStation) &&
+    filledParam(itinerary.toLatitude)
+  ) {
+    return (
+      <div>
+        <h3>
+          <Emoji e="🚉" /> Choissiez votre gare d'arrivée
+        </h3>
+        <Stations gares={garesTo} count={3} />
+      </div>
+    );
+  }
 }
 
 const garesProches = (gares, itinerary, toOrFrom) =>

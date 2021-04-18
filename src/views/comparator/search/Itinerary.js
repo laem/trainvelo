@@ -5,6 +5,7 @@ import Emoji from "components/base/Emoji";
 import gares from "../../../gares.json";
 
 import Address from "./itinerary/Address";
+import { filledParam } from "../Results";
 
 const Wrapper = styled.div`
   position: relative;
@@ -35,7 +36,7 @@ export default function Itinerary() {
           {gares.find(({ uic }) => uic === itinerary.fromStation).libelle}
         </p>
       )}
-      <Address type="to" />
+      {filledParam(itinerary.fromStation) && <Address type="to" />}
       {itinerary.toLatitude && itinerary.fromLatitude && (
         <BikeDistance {...{ itinerary, setItinerary }} />
       )}
@@ -56,9 +57,10 @@ const BikeDistance = ({ itinerary, setItinerary }) => (
       />{" "}
       km à vélo
     </label>
+    <br />
     <label>
       {" "}
-      mais au maximum{" "}
+      au maximum{" "}
       <ShortNumberInput
         type="number"
         value={itinerary.maxBikeKm}

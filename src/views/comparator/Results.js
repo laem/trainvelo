@@ -71,13 +71,18 @@ export default function Results() {
   }
   return (
     <Wrapper>
-      <p>1️⃣ &nbsp;Voici les gares les plus proches</p>
+      <p>
+        <Emoji e="1️⃣" /> Voici les gares les plus proches
+      </p>
       <h3>Départ</h3>
 
       <Stations gares={garesFrom} />
       <h3>Arrivée</h3>
       <Stations gares={garesTo} count={20} />
-      <p>2️⃣ &nbsp;La suite n'est pas encore implémentée :)</p>
+      <p>
+        <Emoji e="1️⃣" />
+        La suite n'est pas encore implémentée :)
+      </p>
     </Wrapper>
   );
 }

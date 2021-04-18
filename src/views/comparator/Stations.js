@@ -40,12 +40,12 @@ const Station = ({ libelle, commune, distance, uic }) => {
       <div>
         <strong>{libelle}</strong>
         <div>
-          <Emoji>🚴</Emoji> {Math.round(distance)} km{" "}
+          <Emoji>🕊️</Emoji> {Math.round(distance)} km{" "}
         </div>
         <div>
           {commune.toUpperCase() !== libelle.toUpperCase() && (
             <span>
-              <Emoji e="E203"></Emoji>&nbsp;
+              <Emoji e="E203" alt="village"></Emoji>&nbsp;
               {commune}
             </span>
           )}

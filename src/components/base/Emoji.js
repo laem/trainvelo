@@ -25,12 +25,12 @@ const Wrapper = styled.span`
   }
 `;
 
-export default ({ e, sizeRem = 2, children }) => {
+export default ({ e, alt, sizeRem = 2, children }) => {
   const emoji = e || children;
   const openmojiFound = openmoji.url(emoji);
   return (
     <Wrapper sizeRem={sizeRem}>
-      <img alt={emoji} src={openmojiFound} />
+      <img alt={alt || emoji} src={openmojiFound} />
     </Wrapper>
   );
 };

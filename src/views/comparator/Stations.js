@@ -1,0 +1,69 @@
+import { useState, useEffect } from "react";
+import styled from "styled-components";
+import getStation from "./wikidata";
+import Emoji from "components/base/Emoji";
+
+const StationVignette = styled.li`
+  border: 4px solid ${(props) => props.theme.colors.second};
+  background: #ffffff9e;
+  margin: 0.6rem;
+  box-shadow: 0 1px 3px rgba(41, 117, 209, 0.12),
+    0 1px 2px rgba(41, 117, 209, 0.24);
+  padding: 0.6rem;
+  will-change: box-shadow;
+  -webkit-user-select: text;
+  user-select: text;
+  transition: box-shadow 0.15s, border-color 0.15s;
+  border-radius: 0.3rem;
+  .emoji {
+    font-size: 140%;
+  }
+  display: flex;
+  justify-content: space-between;
+`;
+
+const StationList = styled.ul`
+  list-style-type: none;
+`;
+
+const Station = ({ libelle, commune, distance, uic }) => {
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    getStation(uic.slice(0, -1)).then((json) =>
+      setData(json?.results?.bindings[0])
+    );
+  }, [uic]);
+
+  return (
+    <StationVignette key={libelle}>
+      <div>
+        <strong>{libelle}</strong>
+        <div>
+          <Emoji>🚴</Emoji> {Math.round(distance)} km{" "}
+        </div>
+        <div>
+          {commune.toUpperCase() !== libelle.toUpperCase() && (
+            <span>
+              <Emoji>🏘️ </Emoji>&nbsp;
+              {commune}
+            </span>
+          )}
+        </div>
+      </div>
+      <div>{data?.pic && <StationImage src={data.pic.value} />}</div>
+    </StationVignette>
+  );
+};
+
+const StationImage = styled.img`
+  max-width: 8rem;
+`;
+
+export const Stations = ({ gares, count = 3 }) => (
+  <StationList>
+    {gares.slice(0, count).map((station) => (
+      <Station {...station} />
+    ))}
+  </StationList>
+);

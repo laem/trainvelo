@@ -104,7 +104,7 @@ export default function Results() {
         <h3>
           <Emoji e="🚉" /> Choissiez votre gare d'arrivée
         </h3>
-        <Stations gares={garesTo} count={3} />
+        <Stations gares={garesTo} count={3} searchTripsFor={itinerary} />
       </div>
     );
   }

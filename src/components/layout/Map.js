@@ -25,8 +25,6 @@ export default function Map() {
 
   const { height, width } = useWindowSize();
 
-  console.log(height, width);
-
   const [viewport, setViewport] = useState({
     latitude: 48.8159,
     longitude: 2.3061,
@@ -44,7 +42,6 @@ export default function Map() {
       buffered.geometry.coordinates[0][2],
     ];
 
-  console.log(buffered, bounds);
   const defaultViewport = (viewport) => ({
     ...viewport,
     latitude: 48.8159,

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import styled from "styled-components";
 import getStation from "./wikidata";
 import Emoji from "components/base/Emoji";
+import { getTrips } from "./trips.js";
 
 const StationVignette = styled.li`
   border: 4px solid ${(props) => props.theme.colors.second};
@@ -27,8 +28,9 @@ const StationList = styled.ul`
   list-style-type: none;
 `;
 
-const Station = ({ station, onClick }) => {
+const Station = ({ station, onClick, searchTripsFor }) => {
   const [data, setData] = useState(null);
+  const [trips, setTrips] = useState(null);
 
   const { libelle, commune, distance, uic } = station;
 
@@ -36,11 +38,17 @@ const Station = ({ station, onClick }) => {
     getStation(uic.slice(0, -1)).then((json) =>
       setData(json?.results?.bindings[0])
     );
+
+    getTrips(searchTripsFor).then((json) => setTrips(json));
   }, [uic]);
+
+  if (trips && trips.journeys) console.log(trips.journeys);
 
   return (
     <StationVignette key={libelle} onClick={() => onClick(uic)}>
       <div>
+        <Emoji e="🚉" />
+        &nbsp;
         <strong>{libelle}</strong>
         <div>
           <Emoji e="E244" />
@@ -56,6 +64,7 @@ const Station = ({ station, onClick }) => {
         </div>
       </div>
       <div>{data?.pic && <StationImage src={data.pic.value} />}</div>
+      <div>JSON.stringify(trips)</div>
     </StationVignette>
   );
 };
@@ -64,10 +73,10 @@ const StationImage = styled.img`
   max-width: 8rem;
 `;
 
-export const Stations = ({ gares, count = 3, onClick }) => (
+export const Stations = ({ gares, count = 3, onClick, searchTripsFor }) => (
   <StationList>
     {gares.slice(0, count).map((station) => (
-      <Station {...{ station, onClick }} />
+      <Station {...{ station, onClick, searchTripsFor }} />
     ))}
   </StationList>
 );

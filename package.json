@@ -1,7 +1,6 @@
 {
   "name": "trainvelo",
   "version": "0.1.0",
-  "private": true,
   "dependencies": {
     "@math.gl/web-mercator": "^3.4.2",
     "@svgmoji/openmoji": "^3.1.0",

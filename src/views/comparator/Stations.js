@@ -3,6 +3,7 @@ import styled from "styled-components";
 import getStation from "./wikidata";
 import Emoji from "components/base/Emoji";
 import { getTrips } from "./trips.js";
+import { JourneySummary } from "./Journeys";
 
 const StationVignette = styled.li`
   border: 4px solid ${(props) => props.theme.colors.second};
@@ -34,18 +35,26 @@ const Station = ({ station, onClick, searchTripsFor }) => {
 
   const { libelle, commune, distance, uic } = station;
 
+  const shouldSearchTrips = searchTripsFor && searchTripsFor.fromStation;
+  console.log("SHOU", shouldSearchTrips);
+
   useEffect(() => {
     getStation(uic.slice(0, -1)).then((json) =>
       setData(json?.results?.bindings[0])
     );
 
-    getTrips(searchTripsFor).then((json) => setTrips(json));
+    shouldSearchTrips &&
+      getTrips(searchTripsFor.fromStation, uic).then((json) => setTrips(json));
   }, [uic]);
 
-  if (trips && trips.journeys) console.log(trips.journeys);
+  console.log("TRIPS", libelle, trips);
+  const journeysFound = trips && trips.journeys;
 
   return (
-    <StationVignette key={libelle} onClick={() => onClick(uic)}>
+    <StationVignette
+      key={libelle}
+      onClick={() => (onClick ? onClick(uic) : () => null)}
+    >
       <div>
         <Emoji e="🚉" />
         &nbsp;
@@ -64,7 +73,14 @@ const Station = ({ station, onClick, searchTripsFor }) => {
         </div>
       </div>
       <div>{data?.pic && <StationImage src={data.pic.value} />}</div>
-      <div>JSON.stringify(trips)</div>
+      <div>
+        {shouldSearchTrips &&
+          (!journeysFound ? (
+            <Emoji e="⏳️" />
+          ) : (
+            <JourneySummary data={journeysFound} />
+          ))}
+      </div>
     </StationVignette>
   );
 };

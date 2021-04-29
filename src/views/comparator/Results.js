@@ -27,10 +27,13 @@ export default function Results() {
     uncertainty,
   } = useContext(TransportationContext);
   const { itinerary, setItinerary } = useContext(SearchContext);
+  const [stationsFrom, setStationsFrom] = useState([]);
+  const [stationsTo, setStationsTo] = useState([]);
 
-  const garesTo = garesProches(gares, itinerary, "to");
-  const garesFrom = garesProches(gares, itinerary, "from");
-  console.log(garesFrom, garesTo);
+  useEffect(() => {
+    setStationsFrom(garesProches(gares, itinerary, "from"));
+    setStationsTo(garesProches(gares, itinerary, "to"));
+  }, [itinerary]);
 
   if (!itinerary.fromLatitude || itinerary.fromLatitude === "") {
     return (
@@ -65,7 +68,7 @@ export default function Results() {
           <Emoji e="🚉" /> Choissiez votre gare de départ
         </h3>
         <Stations
-          gares={garesFrom}
+          gares={stationsFrom}
           count={6}
           onClick={(stationUIC) =>
             setItinerary({ ...itinerary, fromStation: stationUIC })
@@ -104,25 +107,30 @@ export default function Results() {
         <h3>
           <Emoji e="🚉" /> Choissiez votre gare d'arrivée
         </h3>
-        <Stations gares={garesTo} count={3} searchTripsFor={itinerary} />
+        <Stations gares={stationsTo} count={3} searchTripsFor={itinerary} />
       </div>
     );
   }
 }
 
-const garesProches = (gares, itinerary, toOrFrom) =>
-  gares
+const garesProches = (gares, itinerary, toOrFrom) => {
+  const sortedStations = gares
     .map((gare) => ({
       ...gare,
       distance: gareDistance(gare, itinerary, toOrFrom),
     }))
-    .filter((gare) => {
-      return toOrFrom === "to"
+    .filter((gare) =>
+      toOrFrom === "to"
         ? gare.distance > +itinerary.minBikeKm &&
-            gare.distance < +itinerary.maxBikeKm
-        : true;
-    })
+          gare.distance < +itinerary.maxBikeKm
+        : true
+    )
     .sort((g1, g2) => g1.distance - g2.distance);
+
+  const tenStations = sortedStations.slice(0, 10 - 1);
+
+  return tenStations;
+};
 
 const gareDistance = (station, itinerary, toOrFrom) => {
   const [lat, long] = station.coordonnées;

@@ -131,19 +131,23 @@ const garesProches = (gares, itinerary, toOrFrom, then) => {
 
 	console.log(tenStations)
 
-	Promise.all(
-		tenStations.map(async (station) => {
-			const bikeDistance = await computeBikeDistance(
-				station.coordonnées.reverse(),
-				[itinerary.fromLongitude, itinerary.fromLatitude]
-			)
+	var enrichedStations = []
 
-			return {
-				...station,
-				bikeDistance: bikeDistance?.features[0].properties['track-length'],
-			}
-		})
-	).then((data) => then(data))
+	tenStations.map(async (station) => {
+		const bikeDistance = await computeBikeDistance(
+			station.coordonnées.reverse(),
+			[itinerary.fromLongitude, itinerary.fromLatitude]
+		)
+
+		const enriched = {
+			...station,
+			bikeDistance: bikeDistance?.features[0].properties['track-length'],
+		}
+
+		enrichedStations = [...enrichedStations, enriched]
+
+		then(enrichedStations)
+	})
 
 	then(tenStations)
 }

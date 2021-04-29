@@ -127,24 +127,33 @@ const garesProches = (gares, itinerary, toOrFrom, then) => {
 		)
 		.sort((g1, g2) => g1.distance - g2.distance)
 
-	const tenStations = sortedStations.slice(0, 10 - 1)
+	const tenStations = sortedStations.slice(0, 5)
 
 	console.log(tenStations)
 
 	Promise.all(
-		tenStations.map(async (station) => ({
-			...station,
-			bikeDistance: computeBikeDistance(station.coordonnées, [
-				itinerary.fromLongitude,
-				itinerary.fromLatitude,
-			]),
-		}))
-	).then((data) => null)
+		tenStations.map(async (station) => {
+			const bikeDistance = await computeBikeDistance(
+				station.coordonnées.reverse(),
+				[itinerary.fromLongitude, itinerary.fromLatitude]
+			)
+
+			return {
+				...station,
+				bikeDistance: bikeDistance?.features[0].properties['track-length'],
+			}
+		})
+	).then((data) => then(data))
 
 	then(tenStations)
 }
 
-const computeBikeDistance = () => 0
+const computeBikeDistance = (from, to) =>
+	fetch(
+		`https://brouter.phyks.me/brouter/brouter?lonlats=${from.join(
+			','
+		)}|${to.join(',')}&profile=phyks-trekking&alternativeidx=0&format=geojson`
+	).then((res) => res.json())
 
 const gareDistance = (station, itinerary, toOrFrom) => {
 	const [lat, long] = station.coordonnées

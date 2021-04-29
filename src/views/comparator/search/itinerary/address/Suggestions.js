@@ -52,7 +52,8 @@ export default function Suggestions(props) {
               type="button"
             >
               <span>
-                {suggestion.properties.name} {suggestion.properties.context}
+                {suggestion.properties.name} {suggestion.properties.city}{" "}
+                {suggestion.properties.context}
               </span>
             </Suggestion>
           )

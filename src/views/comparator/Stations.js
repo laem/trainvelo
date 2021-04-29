@@ -36,7 +36,6 @@ const Station = ({ station, onClick, searchTripsFor }) => {
   const { libelle, commune, distance, uic } = station;
 
   const shouldSearchTrips = searchTripsFor && searchTripsFor.fromStation;
-  console.log("SHOU", shouldSearchTrips);
 
   useEffect(() => {
     getStation(uic.slice(0, -1)).then((json) =>
@@ -47,7 +46,6 @@ const Station = ({ station, onClick, searchTripsFor }) => {
       getTrips(searchTripsFor.fromStation, uic).then((json) => setTrips(json));
   }, [uic]);
 
-  console.log("TRIPS", libelle, trips);
   const journeysFound = trips && trips.journeys;
 
   return (

@@ -31,10 +31,11 @@ export default function Results() {
   const [stationsTo, setStationsTo] = useState([]);
 
   useEffect(() => {
-    setStationsFrom(garesProches(gares, itinerary, "from"));
-    setStationsTo(garesProches(gares, itinerary, "to"));
+    garesProches(gares, itinerary, "from", setStationsFrom);
+    garesProches(gares, itinerary, "to", setStationsTo);
   }, [itinerary]);
 
+  console.log("ITINERARAY", itinerary);
   if (!itinerary.fromLatitude || itinerary.fromLatitude === "") {
     return (
       <div>
@@ -78,7 +79,6 @@ export default function Results() {
     );
   }
 
-  console.log("ITI", itinerary);
   console.log(
     filledParam(itinerary.fromLatitude),
     filledParam(itinerary.fromStation),
@@ -113,7 +113,7 @@ export default function Results() {
   }
 }
 
-const garesProches = (gares, itinerary, toOrFrom) => {
+const garesProches = (gares, itinerary, toOrFrom, then) => {
   const sortedStations = gares
     .map((gare) => ({
       ...gare,
@@ -129,8 +129,22 @@ const garesProches = (gares, itinerary, toOrFrom) => {
 
   const tenStations = sortedStations.slice(0, 10 - 1);
 
-  return tenStations;
+  console.log(tenStations);
+
+  Promise.all(
+    tenStations.map(async (station) => ({
+      ...station,
+      bikeDistance: computeBikeDistance(station.coordonnées, [
+        itinerary.fromLongitude,
+        itinerary.fromLatitude,
+      ]),
+    }))
+  ).then((data) => null);
+
+  then(tenStations);
 };
+
+const computeBikeDistance = () => 0;
 
 const gareDistance = (station, itinerary, toOrFrom) => {
   const [lat, long] = station.coordonnées;

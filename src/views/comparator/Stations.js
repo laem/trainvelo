@@ -74,18 +74,26 @@ const Station = ({ station, onClick, searchTripsFor }) => {
 					)}
 				</div>
 			</div>
-			<div>{data?.pic && <StationImage src={data.pic.value} />}</div>
-			<div>
-				{shouldSearchTrips &&
-					(!journeysFound ? (
+			<CenteredContainer>
+				{data?.pic && <StationImage src={data.pic.value} />}
+			</CenteredContainer>
+			{shouldSearchTrips && (
+				<div>
+					{!journeysFound ? (
 						<Emoji e="⏳️" />
 					) : (
 						<JourneySummary data={journeysFound} />
-					))}
-			</div>
+					)}
+				</div>
+			)}
 		</StationVignette>
 	)
 }
+
+const CenteredContainer = styled.div`
+	display: flex;
+	align-items: center;
+`
 
 const StationImage = styled.img`
 	max-width: 8rem;

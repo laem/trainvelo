@@ -24,7 +24,7 @@ const InputWrapper = styled.div`
 	top: 0;
 	left: 100%;
 	width: 33rem;
-	background-color: ${(props) => props.theme.colors.quad};
+	background: linear-gradient(90deg, #fbb69e 0%, #fff1b3 100%);
 	border: 2px solid ${(props) => props.theme.colors.main};
 	border-radius: 0.75em;
 	box-shadow: ${(props) =>
@@ -43,7 +43,9 @@ const InputWrapper = styled.div`
 		);
 	}
 `
-const Input = styled(TextInput)``
+const Input = styled(TextInput)`
+	color: ${(props) => props.theme.colors.main};
+`
 const Km = styled.div`
 	position: absolute;
 	top: 100%;

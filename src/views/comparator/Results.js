@@ -154,9 +154,9 @@ const garesProches = (gares, itinerary, toOrFrom, then) => {
 
 const computeBikeDistance = (from, to) =>
 	fetch(
-		`https://brouter.phyks.me/brouter/brouter?lonlats=${from.join(
+		`https://brouter.de/brouter?lonlats=${from.join(',')}|${to.join(
 			','
-		)}|${to.join(',')}&profile=phyks-trekking&alternativeidx=0&format=geojson`
+		)}&profile=phyks-trekking&alternativeidx=0&format=geojson`
 	).then((res) => res.json())
 
 const gareDistance = (station, itinerary, toOrFrom) => {

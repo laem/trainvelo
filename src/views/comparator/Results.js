@@ -35,7 +35,6 @@ export default function Results() {
 		garesProches(gares, itinerary, 'to', setStationsTo)
 	}, [itinerary])
 
-	console.log('ITINERARAY', itinerary)
 	if (!itinerary.fromLatitude || itinerary.fromLatitude === '') {
 		return (
 			<div>
@@ -115,10 +114,20 @@ export default function Results() {
 
 const garesProches = (gares, itinerary, toOrFrom, then) => {
 	const sortedStations = gares
-		.map((gare) => ({
-			...gare,
-			distance: gareDistance(gare, itinerary, toOrFrom),
-		}))
+		.map(
+			(gare) =>
+				(gare.commune === 'BREST' &&
+					console.log(
+						'BBBBBBBBBRRRRRR',
+						gare,
+						gareDistance(gare, itinerary, toOrFrom),
+						itinerary,
+						toOrFrom
+					)) || {
+					...gare,
+					distance: gareDistance(gare, itinerary, toOrFrom),
+				}
+		)
 		.filter((gare) =>
 			toOrFrom === 'to'
 				? gare.distance > +itinerary.minBikeKm &&
@@ -129,14 +138,14 @@ const garesProches = (gares, itinerary, toOrFrom, then) => {
 
 	const tenStations = sortedStations.slice(0, 5)
 
-	console.log(tenStations)
+	console.log('5STATIONS', tenStations)
 
 	var enrichedStations = []
 
 	tenStations.map(async (station) => {
 		const bikeDistance = await computeBikeDistance(
-			station.coordonnées.reverse(),
-			[itinerary.fromLongitude, itinerary.fromLatitude]
+			[...station.coordonnées].reverse(),
+			[itinerary[toOrFrom + 'Longitude'], itinerary[toOrFrom + 'Latitude']]
 		)
 
 		const enriched = {
@@ -156,7 +165,7 @@ const computeBikeDistance = (from, to) =>
 	fetch(
 		`https://brouter.de/brouter?lonlats=${from.join(',')}|${to.join(
 			','
-		)}&profile=phyks-trekking&alternativeidx=0&format=geojson`
+		)}&profile=trekking&alternativeidx=0&format=geojson`
 	).then((res) => res.json())
 
 const gareDistance = (station, itinerary, toOrFrom) => {

@@ -1,9 +1,9 @@
 {
   "name": "trainvelo",
   "version": "0.1.0",
-  "private": true,
   "dependencies": {
     "@math.gl/web-mercator": "^3.4.2",
+    "@svgmoji/openmoji": "^3.1.0",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
@@ -23,6 +23,7 @@
     "react-tooltip": "^4.2.15",
     "styled-components": "^5.2.1",
     "styled-normalize": "^8.0.7",
+    "svgmoji": "^3.1.0",
     "twemoji": "^13.0.1",
     "use-query-params": "^1.1.9",
     "web-vitals": "^0.2.4"

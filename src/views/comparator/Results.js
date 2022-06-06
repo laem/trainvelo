@@ -1,169 +1,183 @@
-import React, { useState, useEffect, useContext } from "react";
-import styled from "styled-components";
-import { Flipper, Flipped } from "react-flip-toolkit";
+import React, { useState, useEffect, useContext } from 'react'
+import styled from 'styled-components'
+import { Flipper, Flipped } from 'react-flip-toolkit'
 
-import TransportationContext from "utils/TransportationContext";
-import SearchContext from "utils/SearchContext";
+import TransportationContext from 'utils/TransportationContext'
+import SearchContext from 'utils/SearchContext'
 
-import Transportation from "./results/Transportation";
-import gares from "../../gares.json";
-import { distance, point } from "@turf/turf";
-import Emoji from "components/base/Emoji";
-import getStation from "./wikidata";
+import Transportation from './results/Transportation'
+import gares from '../../gares.json'
+import { distance, point } from '@turf/turf'
+import Emoji from 'components/base/Emoji'
+import { Stations } from './Stations'
+
+export const filledParam = (s) => s != null && s !== ''
 
 const Wrapper = styled.div`
-  flex: 1;
-  position: relative;
-  margin-bottom: 2rem;
-`;
+	flex: 1;
+	position: relative;
+	margin-bottom: 2rem;
+`
 export default function Results() {
-  const {
-    transportations,
-    transportationsVisibles,
-    transportationsAlwaysVisibles,
-    carpool,
-    uncertainty,
-  } = useContext(TransportationContext);
-  const { itinerary } = useContext(SearchContext);
+	const {
+		transportations,
+		transportationsVisibles,
+		transportationsAlwaysVisibles,
+		carpool,
+		uncertainty,
+	} = useContext(TransportationContext)
+	const { itinerary, setItinerary } = useContext(SearchContext)
+	const [stationsFrom, setStationsFrom] = useState([])
+	const [stationsTo, setStationsTo] = useState([])
 
-  console.log("ITI", itinerary);
+	useEffect(() => {
+		garesProches(gares, itinerary, 'from', setStationsFrom)
+		garesProches(gares, itinerary, 'to', setStationsTo)
+	}, [itinerary])
 
-  const garesTo = garesProches(gares, itinerary, "to");
-  const garesFrom = garesProches(gares, itinerary, "from");
-  console.log(garesFrom, garesTo);
-  if (!itinerary.fromLatitude || itinerary.fromLatitude === "") {
-    return (
-      <div>
-        <p>
-          Renseignez un départ pour que l'on puisse choisir la gare de départ
-        </p>
-        <br />
-        <br />
-        <p>
-          <Emoji size="160%">🚧</Emoji> Attention, ceci n'est qu'une ébauche de
-          projet.{" "}
-        </p>
-        <p>
-          Rendez-vous sur{" "}
-          <a href="https://github.com/laem/trainvelo/releases">
-            {" "}
-            github.com/laem/trainvelo
-          </a>{" "}
-          pour participer .
-        </p>
-      </div>
-    );
-  }
-  if (itinerary.fromLatitude && !itinerary.toLatitude) {
-    return (
-      <div>
-        <h3>📍 Les gares à proximité du départ</h3>
-        <Gares gares={garesFrom} count={6} />
-      </div>
-    );
-  }
-  return (
-    <Wrapper>
-      <p>1️⃣ &nbsp;Voici les gares les plus proches</p>
-      <h3>Départ</h3>
+	if (!itinerary.fromLatitude || itinerary.fromLatitude === '') {
+		return (
+			<div>
+				<p></p>
+				<h3>📍 Renseignez une adresse de départ.</h3>
+				<br />
+				<br />
+				<p>
+					<Emoji size="160%">🚧</Emoji> Attention, ceci n'est qu'une ébauche de
+					projet.{' '}
+				</p>
+				<p>
+					Rendez-vous sur{' '}
+					<a href="https://github.com/laem/trainvelo/releases">
+						{' '}
+						github.com/laem/trainvelo
+					</a>{' '}
+					pour participer .
+				</p>
+			</div>
+		)
+	}
+	if (
+		filledParam(itinerary.fromLatitude) &&
+		!filledParam(itinerary.fromStation) &&
+		!itinerary.toLatitude
+	) {
+		return (
+			<div>
+				<h3>
+					<Emoji e="🚉" /> Choissiez votre gare de départ
+				</h3>
+				<Stations
+					gares={stationsFrom}
+					count={6}
+					onClick={(stationUIC) =>
+						setItinerary({ ...itinerary, fromStation: stationUIC })
+					}
+				/>
+			</div>
+		)
+	}
 
-      <Gares gares={garesFrom} />
-      <h3>Arrivée</h3>
-      <Gares gares={garesTo} count={20} />
-      <p>2️⃣ &nbsp;La suite n'est pas encore implémentée :)</p>
-    </Wrapper>
-  );
+	console.log(
+		filledParam(itinerary.fromLatitude),
+		filledParam(itinerary.fromStation),
+		!filledParam(itinerary.toLatitude)
+	)
+
+	if (
+		filledParam(itinerary.fromLatitude) &&
+		filledParam(itinerary.fromStation) &&
+		!filledParam(itinerary.toLatitude)
+	) {
+		return (
+			<div>
+				<h3>📍 Saisissez votre adresse d'arrivée</h3>
+			</div>
+		)
+	}
+
+	if (
+		filledParam(itinerary.fromLatitude) &&
+		filledParam(itinerary.fromStation) &&
+		filledParam(itinerary.toLatitude)
+	) {
+		return (
+			<div>
+				<h3>
+					<Emoji e="🚉" /> Choissiez votre gare d'arrivée
+				</h3>
+				<Stations gares={stationsTo} count={3} searchTripsFor={itinerary} />
+			</div>
+		)
+	}
 }
 
-const StationVignette = styled.li`
-  border: 4px solid ${(props) => props.theme.colors.second};
-  background: #ffffff9e;
-  margin: 0.6rem;
-  box-shadow: 0 1px 3px rgba(41, 117, 209, 0.12),
-    0 1px 2px rgba(41, 117, 209, 0.24);
-  padding: 0.6rem;
-  will-change: box-shadow;
-  -webkit-user-select: text;
-  user-select: text;
-  transition: box-shadow 0.15s, border-color 0.15s;
-  border-radius: 0.3rem;
-  .emoji {
-    font-size: 140%;
-  }
-  display: flex;
-  justify-content: space-between;
-`;
+const garesProches = (gares, itinerary, toOrFrom, then) => {
+	const sortedStations = gares
+		.map(
+			(gare) =>
+				(gare.commune === 'BREST' &&
+					console.log(
+						'BBBBBBBBBRRRRRR',
+						gare,
+						gareDistance(gare, itinerary, toOrFrom),
+						itinerary,
+						toOrFrom
+					)) || {
+					...gare,
+					distance: gareDistance(gare, itinerary, toOrFrom),
+				}
+		)
+		.filter((gare) =>
+			toOrFrom === 'to'
+				? gare.distance > +itinerary.minBikeKm &&
+				  gare.distance < +itinerary.maxBikeKm
+				: true
+		)
+		.sort((g1, g2) => g1.distance - g2.distance)
 
-const StationList = styled.ul`
-  list-style-type: none;
-`;
+	const tenStations = sortedStations.slice(0, 5)
 
-const Station = ({ libelle, commune, distance, uic }) => {
-  const [data, setData] = useState(null);
+	console.log('5STATIONS', tenStations)
 
-  useEffect(() => {
-    getStation(uic.slice(0, -1)).then((json) =>
-      setData(json?.results?.bindings[0])
-    );
-  }, [uic]);
+	var enrichedStations = []
 
-  return (
-    <StationVignette key={libelle}>
-      <div>
-        <strong>{libelle}</strong>
-        <div>
-          <Emoji>🚴</Emoji> {Math.round(distance)} km{" "}
-        </div>
-        <div>
-          {commune.toUpperCase() !== libelle.toUpperCase() && (
-            <span>
-              <Emoji>🏘️ </Emoji>&nbsp;
-              {commune}
-            </span>
-          )}
-        </div>
-      </div>
-      <div>{data?.pic && <StationImage src={data.pic.value} />}</div>
-    </StationVignette>
-  );
-};
+	tenStations.map(async (station) => {
+		const bikeDistance = await computeBikeDistance(
+			[...station.coordonnées].reverse(),
+			[itinerary[toOrFrom + 'Longitude'], itinerary[toOrFrom + 'Latitude']]
+		)
 
-const StationImage = styled.img`
-  max-width: 8rem;
-`;
+		const enriched = {
+			...station,
+			bikeDistance: bikeDistance?.features[0].properties['track-length'],
+		}
 
-const Gares = ({ gares, count = 3 }) => (
-  <StationList>
-    {gares.slice(0, count).map((station) => (
-      <Station {...station} />
-    ))}
-  </StationList>
-);
+		enrichedStations = [...enrichedStations, enriched]
 
-const garesProches = (gares, itinerary, toOrFrom) =>
-  gares
-    .map((gare) => ({
-      ...gare,
-      distance: gareDistance(gare, itinerary, toOrFrom),
-    }))
-    .filter((gare) => {
-      return toOrFrom === "to"
-        ? gare.distance > +itinerary.minBikeKm &&
-            gare.distance < +itinerary.maxBikeKm
-        : true;
-    })
-    .sort((g1, g2) => g1.distance - g2.distance);
+		then(enrichedStations)
+	})
+
+	then(tenStations)
+}
+
+const computeBikeDistance = (from, to) =>
+	fetch(
+		`https://brouter.de/brouter?lonlats=${from.join(',')}|${to.join(
+			','
+		)}&profile=trekking&alternativeidx=0&format=geojson`
+	).then((res) => res.json())
 
 const gareDistance = (station, itinerary, toOrFrom) => {
-  const [lat, long] = station.coordonnées;
+	const [lat, long] = station.coordonnées
 
-  const attributeLong = toOrFrom + "Longitude";
-  const attributeLat = toOrFrom + "Latitude";
+	const attributeLong = toOrFrom + 'Longitude'
+	const attributeLat = toOrFrom + 'Latitude'
 
-  const A = point([
-    Number(itinerary[attributeLong]),
-    Number(itinerary[attributeLat]),
-  ]);
-  const B = point([long, lat]);
-  return distance(A, B);
-};
+	const A = point([
+		Number(itinerary[attributeLong]),
+		Number(itinerary[attributeLat]),
+	])
+	const B = point([long, lat])
+	return distance(A, B)
+}

@@ -1,63 +1,41 @@
 {
-  "name": "trainvelo",
-  "version": "0.1.0",
-  "dependencies": {
-    "@math.gl/web-mercator": "^3.4.2",
-    "@svgmoji/openmoji": "^3.1.0",
-    "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
-    "@turf/turf": "^6.3.0",
-    "animated-number-react": "^0.1.1",
-    "copy-to-clipboard": "^3.3.1",
-    "iframe-resizer": "^4.3.1",
-    "query-string": "^6.13.8",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
-    "react-flip-toolkit": "^7.0.13",
-    "react-map-gl": "5.2.11",
-    "react-mapbox-gl-geocoder": "^1.1.0",
-    "react-router-dom": "^5.2.0",
-    "react-scripts": "4.0.1",
-    "react-switch": "^6.0.0",
-    "react-tooltip": "^4.2.15",
-    "styled-components": "^5.2.1",
-    "styled-normalize": "^8.0.7",
-    "svgmoji": "^3.1.0",
-    "twemoji": "^13.0.1",
-    "use-query-params": "^1.1.9",
-    "web-vitals": "^0.2.4"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build && yarn iframe",
-    "iframe": "webpack",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "devDependencies": {
-    "webpack": "^5.16.0",
-    "webpack-cli": "^4.4.0"
-  },
-  "resolutions": {
-    "react-scripts/eslint-webpack-plugin": "2.3.0"
-  }
+	"name": "trainvelo",
+	"version": "0.1.0",
+	"dependencies": {
+		"@babel/runtime": "^7.3.4",
+		"@math.gl/web-mercator": "^3.4.2",
+		"@svgmoji/openmoji": "^3.1.0",
+		"@turf/turf": "^6.3.0",
+		"react": "^18.2.0",
+		"react-dom": "^18.2.0",
+		"react-flip-toolkit": "^7.0.13",
+		"react-map-gl": "5.2.11",
+		"react-mapbox-gl-geocoder": "^1.1.0",
+		"react-router-dom": "6",
+		"styled-components": "^5.2.1"
+	},
+	"engines": {
+		"node": ">=16"
+	},
+	"browserslist": [
+		"> 1% in FR",
+		"not ie < 11",
+		"not op_mini all"
+	],
+	"devDependencies": {
+		"webpack": "^5.16.0",
+		"webpack-cli": "^4.4.0",
+		"@babel/core": "^7.9.0",
+		"@babel/plugin-proposal-class-properties": "^7.8.3",
+		"@babel/plugin-proposal-nullish-coalescing-operator": "^7.8.3",
+		"@babel/plugin-proposal-object-rest-spread": "^7.9.5",
+		"@babel/plugin-proposal-optional-chaining": "^7.9.0",
+		"@babel/preset-env": "^7.9.5",
+		"@babel/preset-react": "^7.9.4",
+		"@babel/preset-typescript": "^7.9.0"
+	},
+	"scripts": {
+		"start": "webpack serve --mode development --config webpack.dev.js",
+		"compile": "NODE_ENV=production yarn run webpack --config webpack.prod.js"
+	}
 }

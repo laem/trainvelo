@@ -1,6 +1,9 @@
 const webpack = require('webpack')
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
 const path = require('path')
+// replace accordingly './.env' with the path of your .env file
+const Dotenv = require('dotenv-webpack')
+console.log('envputain', process.env.REACT_APP_SNCF_TOKEN)
 
 const {
 	commonLoaders,
@@ -27,5 +30,6 @@ module.exports = {
 			NODE_ENV: JSON.stringify('development'),
 		}),
 		new ReactRefreshWebpackPlugin(),
+		new Dotenv(),
 	],
 }

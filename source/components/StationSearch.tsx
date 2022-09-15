@@ -15,6 +15,7 @@ const SimpleButton = styled.button`
 
 export default function Itinerary() {
 	const { itinerary, setItinerary } = useContext(SearchContext)
+	console.log('iti', itinerary)
 	return (
 		<div>
 			<h1>Voyager en train</h1>

@@ -44,12 +44,12 @@ export default function Results() {
 	if (
 		filledParam(itinerary.fromLatitude) &&
 		!filledParam(itinerary.fromStation) &&
-		!itinerary.toLatitude
+		!filledParam(itinerary.toLatitude)
 	) {
 		return (
 			<div>
 				<h3>
-					<Emoji e="🚉" /> Choissiez votre gare de départ
+					<Emoji e="🚉" /> Choisissez votre gare de départ
 				</h3>
 				<Stations
 					gares={stationsFrom}
@@ -97,6 +97,7 @@ export default function Results() {
 }
 
 const garesProches = (gares, itinerary, toOrFrom, then) => {
+	console.log('G', gares)
 	const sortedStations = gares
 		.map(
 			(gare) =>

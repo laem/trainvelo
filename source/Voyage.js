@@ -11,13 +11,12 @@ export default () => (
 			justify-content: center;
 			align-items: center;
 			height: 100%;
-			img {
+			> img {
 				width: 6rem;
 				height: auto;
 			}
 		`}
 	>
-		{process.env}
 		<img src="/images/logo.svg" width="1" height="1" />
 		<QueryParamProvider adapter={ReactRouter6Adapter}>
 			<SearchProvider>

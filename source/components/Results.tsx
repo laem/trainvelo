@@ -151,7 +151,9 @@ const computeBikeDistance = (from, to) =>
 		`https://brouter.de/brouter?lonlats=${from.join(',')}|${to.join(
 			','
 		)}&profile=trekking&alternativeidx=0&format=geojson`
-	).then((res) => res.json())
+	)
+		.then((res) => res.json())
+		.catch((e) => console.log(e))
 
 const gareDistance = (station, itinerary, toOrFrom) => {
 	const [lat, long] = station.coordonnées

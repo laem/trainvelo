@@ -82,9 +82,22 @@ module.exports.commonLoaders = (mode = 'production') => {
 						corejs: '3',
 					},
 				],
+				[
+					'@babel/preset-react',
+					{
+						runtime: 'automatic',
+					},
+				],
+				'@babel/preset-typescript',
 			],
 			plugins: [
-				// ... other plugins
+				'@babel/plugin-proposal-class-properties',
+				'@babel/plugin-proposal-optional-chaining',
+				'@babel/plugin-proposal-nullish-coalescing-operator',
+				'@babel/plugin-proposal-object-rest-spread',
+				'@babel/plugin-syntax-dynamic-import',
+				'babel-plugin-styled-components',
+				['webpack-alias', { config: './webpack.dev.js' }],
 				mode === 'development' && require.resolve('react-refresh/babel'),
 			].filter(Boolean),
 		},
@@ -135,7 +148,7 @@ module.exports.commonLoaders = (mode = 'production') => {
 	]
 }
 
-module.exports.HTMLPlugins = ({ injectTrackingScript = false } = {}) => [
+module.exports.HTMLPlugins = () => [
 	new HTMLPlugin({
 		template: 'index.html',
 		chunks: ['entry'],

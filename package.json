@@ -26,12 +26,6 @@
 		"markdown-to-jsx": "^7.1.7",
 		"mini-css-extract-plugin": "^2.6.1",
 		"path-browserify": "^1.0.1",
-		"process": "^0.11.10",
-		"publicodes": "^1.0.0-beta.49",
-		"publicodes-react": "^1.0.0-beta.49",
-		"puppeteer-core": "^15.3.0",
-		"qrcode.react": "^3.1.0",
-		"ramda": "^0.28.0",
 		"react": "^18.2.0",
 		"react-color": "^2.14.0",
 		"react-dom": "^18.2.0",
@@ -57,7 +51,6 @@
 		"use-debounce": "^8.0.4",
 		"use-query-params": "^2.1.0",
 		"uuid": "^8.3.2",
-		"webpack-dev-server": "^4.9.3",
 		"y-webrtc": "^10.2.3",
 		"y-websocket": "^1.4.3",
 		"yarn": "^1.22.19"
@@ -96,7 +89,6 @@
 		"css-loader": "^6.7.1",
 		"css-minimizer-webpack-plugin": "^4.1.0",
 		"csv-loader": "^3.0.3",
-		"dotenv-webpack": "^8.0.1",
 		"eslint": "^8.19.0",
 		"eslint-plugin-jsx-a11y": "^6.5.1",
 		"eslint-plugin-react": "^7.30.1",
@@ -110,14 +102,18 @@
 		"style-loader": "^3.3.1",
 		"typescript": "^4.7.4",
 		"url-loader": "^4.1.0",
-		"webpack": "^5.73.0",
+		"webpack": "^5.74.0",
 		"webpack-bundle-analyzer": "^4.5.0",
 		"webpack-cli": "^4.10.0",
+		"webpack-dev-server": "^4.11.0",
 		"worker-loader": "^3.0.8",
 		"yaml-loader": "^0.8.0"
 	},
 	"scripts": {
 		"start": "webpack serve --mode development --config webpack.dev.js",
 		"compile": "NODE_ENV=production yarn run webpack --config webpack.prod.js"
+	},
+	"resolutions": {
+		"styled-components": "^5"
 	}
 }

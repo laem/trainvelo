@@ -59,11 +59,11 @@ const Station = ({ station, onClick, searchTripsFor }) => {
 				<strong>{libelle}</strong>
 				{bikeDistance && (
 					<div>
-						<Emoji>🚴</Emoji> {Math.round(bikeDistance / 1000)} km
+						<Emoji e="🚴" /> {Math.round(bikeDistance / 1000)} km
 					</div>
 				)}
 				<div>
-					<Emoji>🕊️</Emoji> {Math.round(distance)} km
+					<Emoji e="🕊️" /> {Math.round(distance)} km
 				</div>
 				<div>
 					{commune.toUpperCase() !== libelle.toUpperCase() && (

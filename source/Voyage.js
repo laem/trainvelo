@@ -18,7 +18,6 @@ export default () => (
 	>
 		<img src="/images/logo.svg" width="1" height="1" />
 		<QueryParamProvider adapter={ReactRouter6Adapter}>
-			>
 			<SearchProvider>
 				<StationSearch />
 			</SearchProvider>

@@ -14,8 +14,8 @@ const Wrapper = styled.div`
 export default function Address(props) {
 	const { km, itinerary, setItinerary } = useContext(SearchContext)
 	const [search, setSearch] = useState(itinerary[props.type])
-	console.log('search', search)
-	const [debouncedSearch] = useDebounce(search, 1000)
+	const [debouncedSearch] = useDebounce(search, 500)
+	console.log('search', debouncedSearch)
 
 	const [suggestions, setSuggestions] = useState([])
 
@@ -56,6 +56,7 @@ export default function Address(props) {
 						clearTimeout(timer)
 						timer = setTimeout(() => setFocus(false), 100)
 					}}
+					placeholder={'Adresse, ville, code postal'}
 				/>
 				<Suggestions
 					suggestions={suggestions}

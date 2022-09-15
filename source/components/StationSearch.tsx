@@ -17,7 +17,7 @@ export default function Itinerary() {
 	const { itinerary, setItinerary } = useContext(SearchContext)
 	return (
 		<div>
-			<h1>Mon voyage est-il faisable en train + vélo&nbsp;?</h1>
+			<h1>Voyager en train</h1>
 			<Address type="from" />
 			{itinerary.fromStation?.length > 0 && (
 				<p>

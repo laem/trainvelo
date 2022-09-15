@@ -27,7 +27,7 @@ module.exports.default = {
 		extensions: ['.js', '.ts', '.tsx'],
 	},
 	entry: {
-		entry: './source/sites/publicodes/entry.js',
+		entry: './source/entry.js',
 	},
 	output: {
 		path: path.resolve('./dist/'),
@@ -36,7 +36,7 @@ module.exports.default = {
 	plugins: [
 		new CopyPlugin({
 			patterns: [
-				'./manifest.webmanifest',
+				//	'./manifest.webmanifest',
 				{
 					from: './source/images',
 					to: 'images',
@@ -139,7 +139,7 @@ module.exports.HTMLPlugins = ({ injectTrackingScript = false } = {}) => [
 	new HTMLPlugin({
 		template: 'index.html',
 		chunks: ['entry'],
-		title: 'Voyag 🏖️',
+		title: 'Bon voyag 🏖️',
 		description: 'Voyage proprement.',
 		filename: 'index.html',
 		base: '/',

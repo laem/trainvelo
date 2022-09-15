@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fr" style="height: 100%">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="initial-scale=1" />
+
+		<link
+			rel="icon"
+			href="/images/logo.png"
+		/>
+
+		<meta
+			name="description"
+			content="<%= htmlWebpackPlugin.options.description %>"
+			data-react-helmet="true"
+		/>
+		<meta property="og:type" content="website" />
+		<meta
+			property="og:title"
+			data-react-helmet="true"
+			content="<%= htmlWebpackPlugin.options.title %>"
+		/>
+		<meta
+			property="og:description"
+			data-react-helmet="true"
+			content="<%= htmlWebpackPlugin.options.description %>"
+		/>
+
+		<meta property="og:image" content="<%= htmlWebpackPlugin.options.logo %>" data-react-helmet="true"	/>
+
+
+		<meta property="twitter:card" content="summary_large_image" />
+
+		<title>
+			<%= htmlWebpackPlugin.options.title %>
+		</title>
+
+		<meta name="theme-color" content="#5758BB" />
+	</head>
+
+	<body style="height: 100%">
+
+		<!-- USER AGENT DATA ATTRIBUTE  -->
+
+		<script>
+			var b = document.documentElement
+			b.setAttribute('data-useragent', navigator.userAgent)
+		</script>
+		<script>
+				if(typeof navigator != 'undefined' && /prerender/i.test(navigator.userAgent)) {
+
+										SC_DISABLE_SPEEDY = true
+}</script>
+
+		<!-- APP  -->
+		<div id="js" style="height: 100%"></div>
+
+	</body>
+</html>

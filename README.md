@@ -1,11 +1,8 @@
-# Train vélo, ou sansbagnole.fr
+# Bon voyage (anciennement train vélo (ou sansbagnole.fr))
 
 ![](https://raw.githubusercontent.com/laem/trainvelo/main/public/logo.png)
 
 Le besoin : https://twitter.com/maeool/status/1371905857269682177
-
-Ceci est un fork de github.com/datagir/monimpacttransport
-
 
 ## Développement
 

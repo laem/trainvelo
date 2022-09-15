@@ -139,7 +139,7 @@ module.exports.HTMLPlugins = ({ injectTrackingScript = false } = {}) => [
 	new HTMLPlugin({
 		template: 'index.html',
 		chunks: ['entry'],
-		title: 'Bon voyag 🏖️',
+		title: 'Bon voyage 🏖️',
 		description: 'Voyage proprement.',
 		filename: 'index.html',
 		base: '/',

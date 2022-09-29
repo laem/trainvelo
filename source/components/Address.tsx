@@ -29,10 +29,6 @@ export default function Address(props) {
 		}
 	}, [debouncedSearch])
 
-	const [focus, setFocus] = useState(false)
-
-	let timer = null
-
 	return (
 		<Wrapper className={props.className} type={props.type}>
 			<span
@@ -48,23 +44,10 @@ export default function Address(props) {
 					onChange={(e) => {
 						setSearch(e.target.value)
 					}}
-					onFocus={() => {
-						clearTimeout(timer)
-						setFocus(true)
-					}}
-					onBlur={() => {
-						clearTimeout(timer)
-						timer = setTimeout(() => setFocus(false), 100)
-					}}
 					placeholder={'Adresse, ville, code postal'}
 				/>
 				<Suggestions
 					suggestions={suggestions}
-					focus={focus}
-					setFocus={(value) => {
-						clearTimeout(timer)
-						setFocus(value)
-					}}
 					onChange={(suggestion) => {
 						setSearch(suggestion.place_name_fr)
 						setItinerary({

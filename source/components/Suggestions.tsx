@@ -4,13 +4,11 @@ import styled from 'styled-components'
 const Wrapper = styled.div`
 	position: relative;
 	z-index: 10;
-	display: ${(props) => (props.focus ? 'block' : 'none')};
 `
 const Suggestion = styled.button`
 	display: block;
 	width: 100%;
 	padding: 0.5rem 0.6em;
-	text-align: left;
 	background-color: transparent;
 	border: none;
 	cursor: pointer;
@@ -30,8 +28,10 @@ export default function Suggestions(props) {
 		setScrolled(false)
 	}, [props.suggestions])
 
+	console.log(props.suggestions)
+
 	return (
-		<Wrapper focus={props.focus} onScroll={() => setScrolled(true)}>
+		<Wrapper onScroll={() => setScrolled(true)}>
 			{props.suggestions.map(
 				(suggestion, index) =>
 					(index < 10 || scrolled) && (
@@ -47,10 +47,31 @@ export default function Suggestions(props) {
 							onBlur={() => props.setFocus(false)}
 							type="button"
 						>
-							<span>
-								{suggestion.properties.name} {suggestion.properties.city}{' '}
-								{suggestion.properties.context}
-							</span>
+							<div>
+								<div
+									css={`
+										display: flex;
+										align-items: center;
+										justify-content: space-between;
+									`}
+								>
+									<span>{suggestion.properties.name}</span>
+									<small
+										css={`
+											background: var(--color);
+											border-radius: 0.2rem;
+											color: white;
+											padding: 0.1rem 0.3rem;
+											margin: 0 0.2rem;
+										`}
+									>
+										{suggestion.properties.city}{' '}
+									</small>
+								</div>
+								<small css="display: block; text-align: right; margin-top: .4rem">
+									{suggestion.properties.context}
+								</small>
+							</div>
 						</Suggestion>
 					)
 			)}

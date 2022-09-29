@@ -15,6 +15,7 @@ export default () => (
 				width: 6rem;
 				height: auto;
 			}
+			--color: #007fff;
 		`}
 	>
 		<img src="/images/logo.svg" width="1" height="1" />

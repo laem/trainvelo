@@ -5,7 +5,7 @@ import Emoji from 'Components/Emoji'
 import gares from '../gares.json'
 
 import Address from './Address'
-import { filledParam } from './Results'
+import { filledParam, StationIcon } from './Results'
 
 const SimpleButton = styled.button`
 	background: none;
@@ -21,14 +21,19 @@ export default function Itinerary() {
 			<h1>Voyager en train</h1>
 			<Address type="from" />
 			{itinerary.fromStation?.length > 0 && (
-				<p>
-					<Emoji e="🚉" /> Gare choisie :{' '}
+				<p
+					css={`
+						display: flex;
+						align-items: center;
+					`}
+				>
+					<StationIcon /> Gare choisie :{' '}
 					{gares.find(({ uic }) => uic === itinerary.fromStation).libelle}
 					&nbsp;
 					<SimpleButton
 						onClick={() => setItinerary({ ...itinerary, fromStation: '' })}
 					>
-						<Emoji e="❌" />
+						<Emoji e="❌" black />
 					</SimpleButton>
 				</p>
 			)}

@@ -99,14 +99,18 @@ const StationListTitle = ({ type }) => (
 			align-items: center;
 		`}
 	>
-		<img
-			src="/images/gare.svg"
-			width="1"
-			height="1"
-			css="width: 3rem; height: auto; margin-right: .6rem"
-		/>{' '}
+		<StationIcon />
 		{type === 'from' ? 'Votre gare de départ ?' : `Votre gare d'arrivée ?`}
 	</h3>
+)
+
+export const StationIcon = () => (
+	<img
+		src="/images/gare.svg"
+		width="1"
+		height="1"
+		css="width: 3rem; height: auto; margin-right: .6rem"
+	/>
 )
 
 const garesProches = (gares, itinerary, toOrFrom, then) => {

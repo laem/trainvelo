@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import styled from 'styled-components'
-import getStation from './wikiData'
+import getStation, { toThumb } from './wikiData'
 import Emoji from 'Components/Emoji'
 import getTrips from './apiSNCF.js'
 import { JourneySummary } from './Journeys'
@@ -73,7 +73,7 @@ const Station = ({ station, onClick, searchTripsFor }) => {
 				</div>
 			</div>
 			<CenteredContainer>
-				{data?.pic && <StationImage src={data.pic.value} />}
+				{data?.pic && <StationImage src={toThumb(data.pic.value)} />}
 			</CenteredContainer>
 			{shouldSearchTrips && (
 				<div>

@@ -48,9 +48,7 @@ export default function Results() {
 	) {
 		return (
 			<div>
-				<h3>
-					<Emoji e="🚉" /> Choisissez votre gare de départ
-				</h3>
+				<StationListTitle type="from" />
 				<Stations
 					gares={stationsFrom}
 					count={6}
@@ -87,14 +85,29 @@ export default function Results() {
 	) {
 		return (
 			<div>
-				<h3>
-					<Emoji e="🚉" /> Choissiez votre gare d'arrivée
-				</h3>
+				<StationListTitle type="to" />
 				<Stations gares={stationsTo} count={3} searchTripsFor={itinerary} />
 			</div>
 		)
 	}
 }
+
+const StationListTitle = ({ type }) => (
+	<h3
+		css={`
+			display: flex;
+			align-items: center;
+		`}
+	>
+		<img
+			src="/images/gare.svg"
+			width="1"
+			height="1"
+			css="width: 3rem; height: auto; margin-right: .6rem"
+		/>{' '}
+		{type === 'from' ? 'Votre gare de départ ?' : `Votre gare d'arrivée ?`}
+	</h3>
+)
 
 const garesProches = (gares, itinerary, toOrFrom, then) => {
 	console.log('G', gares)

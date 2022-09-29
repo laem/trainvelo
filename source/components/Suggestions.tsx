@@ -41,10 +41,7 @@ export default function Suggestions(props) {
 								props.onChange(
 									console.log('suggestion selected', suggestion) || suggestion
 								)
-								props.setFocus(false)
 							}}
-							onFocus={() => props.setFocus(true)}
-							onBlur={() => props.setFocus(false)}
 							type="button"
 						>
 							<div>

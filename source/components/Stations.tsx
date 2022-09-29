@@ -54,8 +54,6 @@ const Station = ({ station, onClick, searchTripsFor }) => {
 			onClick={() => (onClick ? onClick(uic) : () => null)}
 		>
 			<div>
-				<Emoji e="🚉" />
-				&nbsp;
 				<strong>{libelle}</strong>
 				{bikeDistance && (
 					<div>

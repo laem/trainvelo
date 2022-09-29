@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
+import CityBadge from './CityBadge'
 
 const Wrapper = styled.div`
 	position: relative;
@@ -53,17 +54,7 @@ export default function Suggestions(props) {
 									`}
 								>
 									<span>{suggestion.properties.name}</span>
-									<small
-										css={`
-											background: var(--color);
-											border-radius: 0.2rem;
-											color: white;
-											padding: 0.1rem 0.3rem;
-											margin: 0 0.2rem;
-										`}
-									>
-										{suggestion.properties.city}{' '}
-									</small>
+									<CityBadge>{suggestion.properties.city} </CityBadge>
 								</div>
 								<small css="display: block; text-align: right; margin-top: .4rem">
 									{suggestion.properties.context}

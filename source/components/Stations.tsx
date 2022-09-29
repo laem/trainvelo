@@ -4,9 +4,11 @@ import getStation, { toThumb } from './wikiData'
 import Emoji from 'Components/Emoji'
 import getTrips from './apiSNCF.js'
 import { JourneySummary } from './Journeys'
+import CityBadge from './CityBadge'
+import { capitalise0 } from '../utils'
 
 const StationVignette = styled.li`
-	border: 4px solid black;
+	border: 1px solid #aaa;
 	background: #ffffff9e;
 	margin: 0.6rem;
 	box-shadow: 0 1px 3px rgba(41, 117, 209, 0.12),
@@ -65,10 +67,7 @@ const Station = ({ station, onClick, searchTripsFor }) => {
 				</div>
 				<div>
 					{commune.toUpperCase() !== libelle.toUpperCase() && (
-						<span>
-							<Emoji e="E203" alt="village"></Emoji>&nbsp;
-							{commune}
-						</span>
+						<CityBadge>{capitalise0(commune)}</CityBadge>
 					)}
 				</div>
 			</div>
@@ -95,6 +94,7 @@ const CenteredContainer = styled.div`
 
 const StationImage = styled.img`
 	max-width: 8rem;
+	border-radius: 0.6rem;
 `
 
 export const Stations = ({ gares, count = 3, onClick, searchTripsFor }) => (

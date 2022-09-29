@@ -5,15 +5,23 @@ import SearchContext from 'Components/SearchContext'
 import { useDebounce } from 'use-debounce'
 import Suggestions from './Suggestions'
 
+const Input = styled.input`
+	border-radius: 0.3rem;
+	border: 2px solid var(--color);
+	font-size: 100%;
+	height: 1.8rem;
+	padding: 0 0.3rem;
+`
+
 const Wrapper = styled.div`
 	position: relative;
 	margin: 0 0 1.5rem ${(props) => (props.type === 'from' ? '2rem' : '6rem')};
 	padding: calc(0.3em + 2px) 0;
 	line-height: 1.15;
 `
-export default function Address(props) {
+export default function Address({ className, type }) {
 	const { km, itinerary, setItinerary } = useContext(SearchContext)
-	const [search, setSearch] = useState(itinerary[props.type])
+	const [search, setSearch] = useState(itinerary[type])
 	const [debouncedSearch] = useDebounce(search, 500)
 	console.log('search', debouncedSearch)
 
@@ -30,14 +38,10 @@ export default function Address(props) {
 	}, [debouncedSearch])
 
 	return (
-		<Wrapper className={props.className} type={props.type}>
-			<span
-				dangerouslySetInnerHTML={{
-					__html: `${props.type === 'from' ? 'depuis' : 'vers'}&nbsp;`,
-				}}
-			/>
+		<Wrapper className={className} type={type}>
+			<span>{type === 'from' ? 'depuis' : 'vers'}&nbsp;</span>
 			<>
-				<input
+				<Input
 					name={'address'}
 					autoComplete="off"
 					value={search}
@@ -51,9 +55,9 @@ export default function Address(props) {
 					onChange={(suggestion) => {
 						setSearch(suggestion.place_name_fr)
 						setItinerary({
-							[props.type]: suggestion.properties.label,
-							[props.type + 'Longitude']: suggestion.geometry.coordinates[0],
-							[props.type + 'Latitude']: suggestion.geometry.coordinates[1],
+							[type]: suggestion.properties.label,
+							[type + 'Longitude']: suggestion.geometry.coordinates[0],
+							[type + 'Latitude']: suggestion.geometry.coordinates[1],
 						})
 					}}
 				/>
